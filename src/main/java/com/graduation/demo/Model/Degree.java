@@ -15,8 +15,9 @@ public class Degree {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private Long student_id;
-    private Long exam_id;
+
     @OneToOne
+    @JoinColumn(name = "exam_id",referencedColumnName = "id")
     private Exam exam;
 
 

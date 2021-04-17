@@ -1,13 +1,12 @@
 package com.graduation.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +19,7 @@ public class Doctor {
     private String name;
     private String phone;
     private String address;
+    @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
+    private Set<Course> course;
 }

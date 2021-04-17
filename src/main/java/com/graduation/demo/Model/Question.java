@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Data
@@ -17,10 +14,13 @@ import java.util.Set;
 @Entity
 public class Question {
     @Id
-    private  Long id;
+    private Long id;
     private String question;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "Question")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     @JsonIgnore
     private Set<Answer> answer;
+    @ManyToOne
+    @JoinColumn(name = "exame_id",referencedColumnName = "id")
+    private Exam exame;
 }

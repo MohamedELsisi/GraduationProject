@@ -1,22 +1,27 @@
 package com.graduation.demo.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Department {
+public class StudentAndCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToOne(mappedBy = "department")
-    @JsonIgnore
-    private LevelAndDep levelAndDep;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id",referencedColumnName = "id")
+    private  Student students;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id",referencedColumnName = "id")
+    private Course courses;
+
 }

@@ -19,7 +19,11 @@ public class Student {
     private String address;
     private String phone;
 
-    private Long Level_dep_id ;
-    @ManyToMany
-private Set<Course> courses;
+    @OneToMany(mappedBy = "students")
+    private Set<StudentAndCourse> studentAndCourse;
+@ManyToOne
+@JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
+    private LevelAndDep levelAndDep;
+
+
 }

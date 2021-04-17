@@ -18,7 +18,6 @@ public class Answer {
     private  String answer;
     @ManyToOne
     @JoinColumn(name ="question_id",referencedColumnName = "id")
-    @JsonIgnore
     private Question question;
 
 

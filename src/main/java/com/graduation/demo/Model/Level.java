@@ -17,7 +17,7 @@ public class Level {
     private Long  id;
     private String name;
 
-    @OneToOne
+    @OneToOne(mappedBy = "level")
     @JsonIgnore
     private LevelAndDep levelAndDep;
 

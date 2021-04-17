@@ -1,5 +1,6 @@
 package com.graduation.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,15 +15,20 @@ import java.util.Set;
 @Entity
 public class Course {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int grade;
     private int passed_value;
 
-    @OneToMany
-    private Set <Exam> exam;
+    @OneToMany(mappedBy = "course")
+    @JsonIgnore
+    private Set<Exam> exam;
 
-    @ManyToMany
-    private  Set<Student>students;
+    @OneToMany(mappedBy = "courses")
+    @JsonIgnore
+    private Set<StudentAndCourse> studentAndCourses;
+    @ManyToOne
+    @JoinColumn(name = "doctor_id",referencedColumnName = "id")
+    private Doctor doctor;
 }

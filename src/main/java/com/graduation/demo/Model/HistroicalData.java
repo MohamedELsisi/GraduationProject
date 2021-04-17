@@ -17,13 +17,7 @@ import java.util.Set;
 public class HistroicalData {
     @Id
     private Long id;
-    private Long course_id;
-    private Long doctor_id;
-    private Long term_id;
-    private Long student_id;
-    @OneToMany
-    private Set<Course> courses;
-    @OneToMany
-    private Set<Doctor> doctors;
+
+
 
 }
