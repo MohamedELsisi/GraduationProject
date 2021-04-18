@@ -1,7 +1,10 @@
 package com.graduation.demo.service;
 
+import com.graduation.demo.Dao.DoctorRepository;
+
 import com.graduation.demo.Model.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +12,8 @@ import java.util.List;
 @Service
 public class DoctorServiceImpl {
     @Autowired
-    private DoctorService doctorService;
+    private DoctorRepository doctorService;
+
 
     public Doctor saveDoctor(Doctor doctor) {
         return doctorService.save(doctor);
@@ -31,9 +35,12 @@ public class DoctorServiceImpl {
         return doctorService.getDoctorByName(name);
     }
 
-    public String deleteDoctorById(Long id) {
-        doctorService.deleteById(id);
-        return "Deleted " + id;
+    public boolean deleteDoctorById(Long id) {
+        Doctor doctor =doctorService.findById(id).orElse(null);
+        if(doctor.equals(null)) return false;
+
+        else doctorService.deleteById(id);
+        return  true;
     }
 
     public Doctor updateDoctor(Doctor doctor) {
