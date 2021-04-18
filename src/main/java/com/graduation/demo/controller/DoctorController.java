@@ -37,7 +37,7 @@ public class DoctorController {
     @GetMapping("/findDoctorById/{id}")
     public ResponseEntity findDoctorById(@PathVariable Long id) {
         Doctor doctor = service.getDoctorById(id);
-        if (doctor.equals(null)) return ResponseEntity.notFound().build();
+        if (doctor== null) return ResponseEntity.notFound().build();
         else
             return ResponseEntity.status(HttpStatus.FOUND).body(doctor);
     }
@@ -50,7 +50,7 @@ public class DoctorController {
     @GetMapping("/findDoctorByName/{name}")
     public ResponseEntity findDoctorByName(@PathVariable String name) {
         Doctor doctor = service.getDoctorByName(name);
-        if (doctor.equals(null)) return ResponseEntity.notFound().build();
+        if (doctor== null) return ResponseEntity.notFound().build();
         else
             return ResponseEntity.status(HttpStatus.FOUND).body(doctor);
     }
@@ -66,7 +66,7 @@ public class DoctorController {
     @PutMapping("/updateDoctor")
     public ResponseEntity updateDoctor(Doctor doctor) {
         Doctor doctor1 = service.updateDoctor(doctor);
-        if (doctor1.equals(null)) return ResponseEntity.notFound().build();
+        if (doctor1== null) return ResponseEntity.notFound().build();
         else {
             logger.info("ORDER_UPDATED_LOG", doctor1.toString());
             return ResponseEntity.ok(doctor1);
