@@ -29,7 +29,14 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<Doctor> saveDoctors(List<Doctor> doctors) {
-        return doctorRepository.saveAll(doctors);
+        log.info("calling save doctors list service ");
+
+        List< Doctor> existingDoctor = doctorRepository.saveAll(doctors);
+        if (existingDoctor == null)
+            log.warn("save doctors list  is null ");
+        else
+            log.info("save doctors list response ");
+        return existingDoctor;
     }
 
     @Override
@@ -41,7 +48,6 @@ public class DoctorServiceImpl implements DoctorService {
         else
             log.info("get doctor by id response ");
         return existingDoctor;
-
 
     }
 
