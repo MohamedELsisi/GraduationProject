@@ -31,7 +31,7 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> saveDoctors(List<Doctor> doctors) {
         log.info("calling save doctors list service ");
 
-        List< Doctor> existingDoctor = doctorRepository.saveAll(doctors);
+        List<Doctor> existingDoctor = doctorRepository.saveAll(doctors);
         if (existingDoctor == null)
             log.warn("save doctors list  is null ");
         else
@@ -98,11 +98,11 @@ public class DoctorServiceImpl implements DoctorService {
         if (existingDoctor == null) log.warn("get Doctor By Name service is null ");
         else
             log.info("update Doctor response ");
-            existingDoctor.setName(doctor.getName());
-            existingDoctor.setPhone(doctor.getPhone());
-            existingDoctor.setAddress(doctor.getAddress());
-
-        return doctorRepository.save(existingDoctor);
+        existingDoctor.setName(doctor.getName());
+        existingDoctor.setPhone(doctor.getPhone());
+        existingDoctor.setAddress(doctor.getAddress());
+        doctorRepository.save(existingDoctor);
+        return existingDoctor;
 
     }
 

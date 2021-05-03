@@ -94,12 +94,12 @@ public class StudentServiceImpl implements StudentService {
         Student existingStudent = repository.findById(student.getId()).orElse(null);
         if (existingStudent == null)
             log.warn("get Doctor By Name service is null ");
-        else {
+        else
             log.info("update Doctor response ");
             existingStudent.setName(student.getName());
             existingStudent.setPhone(student.getPhone());
             existingStudent.setAddress(student.getAddress());
-        }
+        repository.save(existingStudent);
         return repository.save(existingStudent);
 
     }

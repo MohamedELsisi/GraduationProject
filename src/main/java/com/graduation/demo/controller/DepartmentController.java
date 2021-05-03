@@ -2,6 +2,8 @@ package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Department;
 import com.graduation.demo.service.DepartmentServiceImpl;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,11 +14,13 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class DepartmentController {
     @Autowired
     private DepartmentServiceImpl service;
 
     @PostMapping("/addDepartment")
+    @ApiOperation(value = "insert new Department ", response = ResponseEntity.class)
     public ResponseEntity addDepartment(@RequestBody Department department) {
         log.info("Add_Department_Controller ", department);
         Department existingDepartment = service.addDepartment(department);
@@ -24,6 +28,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/addAllDepartment")
+    @ApiOperation(value = "insert List of Departments ", response = ResponseEntity.class)
     public ResponseEntity<List<Department>> addAllDepartment(@RequestBody List<Department> departments) {
         log.info("create_List_Of_Doctor_Controller " + departments);
         List<Department> existingDepartments = service.addAllDepartment(departments);
@@ -32,7 +37,9 @@ public class DepartmentController {
     }
 
     @GetMapping("/findDepartmentById/{id}")
-    public ResponseEntity findDepartmentById(@PathVariable Long id) {
+    @ApiOperation(value = "search about Department by id  ", response = ResponseEntity.class)
+    public ResponseEntity findDepartmentById(@ApiParam(value = "id value for the Department u need to retrieve", required = true)
+                                             @PathVariable Long id) {
         log.info("Find Department by id in controller with id = " + id);
         Department existingDepartment = service.getDepartmentById(id);
 
@@ -42,7 +49,9 @@ public class DepartmentController {
             return ResponseEntity.status(HttpStatus.FOUND).body(existingDepartment);
     }
 
+
     @GetMapping("/getAllDepartments")
+    @ApiOperation(value = "Show All  Department ", response = ResponseEntity.class)
     public ResponseEntity<List<Department>> getAllDepartments() {
         log.info("Get All Doctors in controller ");
         List<Department> existingDepartment = service.getAllDepartment();
@@ -53,7 +62,10 @@ public class DepartmentController {
     }
 
     @GetMapping("/findDepartmentByName/{name}")
-    public ResponseEntity findDepartmentByName(@PathVariable String name) {
+    @ApiOperation(value = "search about Department by name  ", response = ResponseEntity.class)
+
+    public ResponseEntity findDepartmentByName(@ApiParam(value = "Name value for the Department u need to retrieve", required = true)
+                                               @PathVariable String name) {
         log.info("Find Department by Name in Controller with name = " + name);
         Department existingDepartment = service.getDepartmentByName(name);
         if (existingDepartment == null)
@@ -63,7 +75,9 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/deleteDepartment/{id}")
-    public ResponseEntity deleteDepartment(@PathVariable Long id) {
+    @ApiOperation(value = "Delete the Department by id ", response = ResponseEntity.class)
+    public ResponseEntity deleteDepartment(@ApiParam(value = "id value for the Department u need to delete", required = true)
+                                           @PathVariable Long id) {
         log.info("Delete Department by id in controller with id = " + id);
         boolean status = service.deleteDepartmentById(id);
         if (status == false)
@@ -74,6 +88,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/updateDepartment")
+    @ApiOperation(value = "Update  the Department ", response = ResponseEntity.class)
     public ResponseEntity updateDepartment(Department department) {
         log.info("Update  doctor  controller with object = " + department);
         Department existingDepartment = service.updateDepartment(department);

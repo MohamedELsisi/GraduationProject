@@ -3,6 +3,8 @@ package com.graduation.demo.controller;
 import com.graduation.demo.Model.Course;
 import com.graduation.demo.Model.Student;
 import com.graduation.demo.service.StudentServiceImpl;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,11 +15,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class StudentController {
     @Autowired
     private StudentServiceImpl service;
 
     @PostMapping("/addStudent")
+    @ApiOperation(value = "insert new Student ", response = ResponseEntity.class)
+
     public ResponseEntity addCourse(@RequestBody Student student) {
         log.info("ADD_STUDENT CONTROLLER " + student);
         Student existingStudent = service.addStudent(student);
@@ -25,14 +30,19 @@ public class StudentController {
     }
 
     @PostMapping("/addAllStudents")
-    public ResponseEntity<List<Student>> addAllCourses(@RequestBody List<Student> students) {
+    @ApiOperation(value = "insert List of students ", response = ResponseEntity.class)
+
+    public ResponseEntity<List<Student>> addAllStudent(@RequestBody List<Student> students) {
         log.info("ADD ALL STUDENT CONTROLLER " + students);
         List<Student> existingStudents = service.addAllStudents(students);
         return ResponseEntity.status(HttpStatus.CREATED).body(existingStudents);
     }
 
     @GetMapping("/findStudentById/{id}")
-    public ResponseEntity findStudentById(@PathVariable Long id) {
+    @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
+
+    public ResponseEntity findStudentById(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
+                                              @PathVariable Long id) {
         log.info("Find Student by id in controller with id = " + id);
         Student existingStudent = service.getStudentById(id);
 
@@ -42,6 +52,8 @@ public class StudentController {
     }
 
     @GetMapping("/getAllStudents")
+    @ApiOperation(value = "Show All Student ", response = ResponseEntity.class)
+
     public ResponseEntity<List<Student>> getAllStudents() {
         log.info("Get All Students in controller ");
         List<Student> existingStudents = service.getAllStudents();
@@ -52,7 +64,10 @@ public class StudentController {
     }
 
     @GetMapping("/findStudentByName/{name}")
-    public ResponseEntity findStudentByName(@PathVariable String name) {
+    @ApiOperation(value = "Search about Student by name ", response = ResponseEntity.class)
+
+    public ResponseEntity findStudentByName(@ApiParam(value = "Name value for the Level u need to retrieve", required = true)
+                                                @PathVariable String name) {
         log.info("Find Student by Name in Controller with name = " + name);
         Student existingStudent = service.getStudentByName(name);
         if ( existingStudent== null)
@@ -62,7 +77,10 @@ public class StudentController {
     }
 
     @DeleteMapping("/deleteStudent/{id}")
-    public ResponseEntity deleteStudent(@PathVariable  Long id) {
+    @ApiOperation(value = "delete student by id ", response = ResponseEntity.class)
+
+    public ResponseEntity deleteStudent(@ApiParam(value = "id value for the student u need to delete", required = true)
+                                            @PathVariable  Long id) {
         log.info("Delete Course by id in controller with id = " + id);
         boolean status = service.deleteStudentById(id);
         if (status == false)
@@ -72,6 +90,7 @@ public class StudentController {
     }
 
     @PutMapping("/updateStudent")
+    @ApiOperation(value = "Update student", response = ResponseEntity.class)
     public ResponseEntity updateStudent(Student student) {
         log.info("Update  Course controller with object = " + student);
         Student existingStudent = service.updateStudent(student);

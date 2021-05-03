@@ -100,6 +100,7 @@ public class CourseServiceImpl implements CourseService {
             existingCourse.setName(course.getName());
             existingCourse.setGrade(course.getGrade());
             existingCourse.setPassed_value(course.getPassed_value());
+            courseRepository.save(existingCourse);
             log.info("UPDATE_COURSE RESPONSE"+existingCourse);
 
         }

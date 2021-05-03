@@ -83,7 +83,7 @@ public class DepartmentServiceImpl implements DepartmentService {
             log.warn("delete_Department_By_Id is null ");
             return false;
         } else {
-            log.info("delete_Department_By_Id response "+existingDepartment);
+            log.info("delete_Department_By_Id response " + existingDepartment);
             repository.deleteById(id);
             return true;
         }
@@ -93,13 +93,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department updateDepartment(Department department) {
         log.info("calling  update_Department service " + department);
-        Department existingDepartment =repository.findById(department.getId()).orElse(null);
-        if(existingDepartment == null )
+        Department existingDepartment = repository.findById(department.getId()).orElse(null);
+        if (existingDepartment == null)
             log.warn(" update_Department is null");
         else
-            log.info(" update_Department Response "+existingDepartment);
+            log.info(" update_Department Response " + existingDepartment);
         existingDepartment.setName(department.getName());
-
+        repository.save(existingDepartment);
         return existingDepartment;
     }
 }
