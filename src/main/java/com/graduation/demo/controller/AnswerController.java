@@ -1,9 +1,7 @@
 package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Answer;
-import com.graduation.demo.Model.Question;
 import com.graduation.demo.service.AnswerService;
-import com.graduation.demo.service.QuestionService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
