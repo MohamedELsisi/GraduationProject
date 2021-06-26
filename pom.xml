@@ -77,9 +77,6 @@
                             <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.graduation.demo.GraduationApplication</mainClass>
                         </manifest>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
                     </archive>
                 </configuration>
             </plugin>
