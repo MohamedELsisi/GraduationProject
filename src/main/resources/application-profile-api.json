@@ -11,7 +11,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
     }
   },
-  "host": "localhost:8070",
+  "host": "ec2-34-225-167-77.compute-1.amazonaws.com",
   "basePath": "/",
   "tags": [
     {
