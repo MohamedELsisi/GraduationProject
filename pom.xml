@@ -63,6 +63,7 @@
     <build>
         <plugins>
 
+
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -75,6 +76,9 @@
                             <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.graduation.demo.GraduationApplication</mainClass>
                         </manifest>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
                     </archive>
                 </configuration>
             </plugin>
