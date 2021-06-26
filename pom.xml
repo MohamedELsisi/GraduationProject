@@ -75,7 +75,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.graduation.demo</mainClass>
+                            <mainClass>com.graduation.demo.GraduationApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
