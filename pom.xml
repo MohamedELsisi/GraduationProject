@@ -71,7 +71,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.graduation.demo</mainClass>
+                            <mainClass>com.graduation.demo.GraduationApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
