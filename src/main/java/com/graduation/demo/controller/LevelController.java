@@ -40,6 +40,7 @@ public class LevelController {
         return ResponseEntity.ok(existingLevels);
     }
 
+
     @GetMapping("/findLevelById/{id}")
     @ApiOperation(value = "search about Level by id ", response = ResponseEntity.class)
 
@@ -95,7 +96,6 @@ public class LevelController {
 
     @PutMapping("/updateLevel")
     @ApiOperation(value = "Update Level  ", response = ResponseEntity.class)
-
     public ResponseEntity updateLevel( @RequestBody  Level Level) {
         log.info("Update  doctor  controller with object = " + Level);
         Level existingLevel = service.updateLevel(Level);
@@ -105,26 +105,4 @@ public class LevelController {
             return ResponseEntity.ok(existingLevel);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
