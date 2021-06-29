@@ -78,8 +78,9 @@ public class DoctorController {
     public ResponseEntity deleteDoctor(@ApiParam(value = "id value for doctor u need to delete ", required = true)
                                        @PathVariable Long id) {
         log.info("Delete doctor by id in controller with id = " + id);
-        boolean status = service.deleteDoctorById(id);
-        if (status == false) return ResponseEntity.notFound().build();
+        boolean status =false;
+                service.deleteDoctorById(id);
+        if (status == false) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         else return ResponseEntity.status(HttpStatus.FOUND).build();
     }
