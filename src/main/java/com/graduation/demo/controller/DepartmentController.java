@@ -96,7 +96,7 @@ public class DepartmentController {
             return ResponseEntity.notFound().build();
         else {
 
-            return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body(existingDepartment);
+            return ResponseEntity.status(HttpStatus.FOUND).body(existingDepartment);
         }
     }
 
