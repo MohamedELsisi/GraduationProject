@@ -82,7 +82,7 @@ public class DoctorController {
                 service.deleteDoctorById(id);
         if (status == false) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
-        else return ResponseEntity.status(HttpStatus.FOUND).build();
+        else return (ResponseEntity) ResponseEntity.ok();
     }
 
     @PutMapping("/updateDoctor")
