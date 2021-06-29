@@ -89,14 +89,14 @@ public class DepartmentController {
 
     @PutMapping("/updateDepartment")
     @ApiOperation(value = "Update  the Department ", response = ResponseEntity.class)
-    public ResponseEntity updateDepartment(Department department) {
+    public ResponseEntity updateDepartment( @RequestBody Department department) {
         log.info("Update  doctor  controller with object = " + department);
         Department existingDepartment = service.updateDepartment(department);
         if (existingDepartment == null)
             return ResponseEntity.notFound().build();
         else {
 
-            return ResponseEntity.ok(existingDepartment);
+            return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body(existingDepartment);
         }
     }
 
