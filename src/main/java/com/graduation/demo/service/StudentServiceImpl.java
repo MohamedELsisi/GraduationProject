@@ -1,7 +1,9 @@
 package com.graduation.demo.service;
 
+import com.graduation.demo.Dao.LoginRepository;
 import com.graduation.demo.Dao.StudentRepository;
 import com.graduation.demo.Model.Doctor;
+import com.graduation.demo.Model.Login;
 import com.graduation.demo.Model.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,21 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository repository;
+    @Autowired
+    private LoginRepository loginRepository;
 
     @Override
     public Student addStudent(Student student) {
         log.info("Calling ADD_STUDENT service with Object " + student);
         Student existingStudent = repository.save(student);
+        Login login =new Login();
+        login.setEmail(student.getEmail());
+        login.setPassword(student.getPassword());
+        login.setType("student");
+        login.setUserName(student.getUserName());
+        loginRepository.save(login);
+
+
         if (existingStudent == null)
             log.warn("ADD_STUDENT is null");
         else
@@ -73,6 +85,20 @@ public class StudentServiceImpl implements StudentService {
 
         return existingStudent;
     }
+    @Override
+    public Student getStudentByEmail(String email) {
+        log.info("calling get_Student_By_email service  " + email);
+        Student existingStudent = repository.findByEmail(email);
+        if (existingStudent == null)
+            log.warn("get Student By Email is null ");
+        else
+            log.info("get Student By Email response " + existingStudent);
+
+        return existingStudent;
+    }
+
+
+
 
     @Override
     public boolean deleteStudentById(Long id) {
@@ -103,4 +129,6 @@ public class StudentServiceImpl implements StudentService {
         return repository.save(existingStudent);
 
     }
+
+
 }

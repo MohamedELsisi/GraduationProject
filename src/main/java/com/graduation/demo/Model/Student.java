@@ -29,8 +29,23 @@ public class Student {
     @ApiModelProperty(notes = "The phone number of Student")
     private String phone;
 
+    @ApiModelProperty(notes = "The user name of Student")
+    private  String userName;
+
+    @ApiModelProperty(notes = "The password of Student")
+    private  String password;
+
+    @ApiModelProperty(notes = "The email of Student")
+    private String email ;
+
+    @ApiModelProperty(notes = "The type Student")
+    private static  String type ="student";
+
+
     @OneToMany(mappedBy = "students")
     private Set<StudentAndCourse> studentAndCourse;
+
+
 
 @ManyToOne
 @JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")

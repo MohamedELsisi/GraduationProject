@@ -30,6 +30,18 @@ public class Doctor {
     @ApiModelProperty(notes = "The address of doctor")
     private String address;
 
+    @ApiModelProperty(notes = "The user name of doctor")
+    private String userName;
+
+    @ApiModelProperty(notes = "The password of doctor")
+    private String password;
+
+    @ApiModelProperty(notes = "The email of doctor")
+    private String email;
+
+    @ApiModelProperty(notes = "The type doctor")
+    private static String type = "doctor";
+
     @OneToMany(mappedBy = "doctor")
     @JsonIgnore
     private Set<Course> course;

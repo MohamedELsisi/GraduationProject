@@ -1,7 +1,9 @@
 package com.graduation.demo.service;
 
 import com.graduation.demo.Dao.DoctorRepository;
+import com.graduation.demo.Dao.LoginRepository;
 import com.graduation.demo.Model.Doctor;
+import com.graduation.demo.Model.Login;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,20 @@ import java.util.List;
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
+    @Autowired
+    private LoginRepository loginRepository;
 
 
     @Override
     public Doctor saveDoctor(Doctor doctor) {
         log.info("calling Save_Doctor service with Object " + doctor);
+        Login login =new Login();
+        login.setEmail(doctor.getEmail());
+        login.setPassword(doctor.getPassword());
+        login.setType("doctor");
+        login.setUserName(doctor.getUserName());
+        loginRepository.save(login);
+
         Doctor existingDoctor = doctorRepository.save(doctor);
         if (existingDoctor == null)
             log.warn("Save_Doctor With object  is null ");
@@ -78,6 +89,19 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public Doctor getDoctorByEmail(String email) {
+        log.info("calling get_Doctor_By_Email service  " + email);
+        Doctor existingDoctor = doctorRepository.getDoctorByEmail(email);
+        if (existingDoctor == null)
+            log.warn("get Doctor By email is null ");
+        else
+            log.info("get Doctor By email response ");
+
+        return existingDoctor;
+    }
+
+
+    @Override
     public boolean deleteDoctorById(Long id) {
         log.info("calling delete_Doctor_By_Id service " + id);
         Doctor doctor = doctorRepository.findById(id).orElse(null);
@@ -105,6 +129,8 @@ public class DoctorServiceImpl implements DoctorService {
         return existingDoctor;
 
     }
+
+
 
 
 }

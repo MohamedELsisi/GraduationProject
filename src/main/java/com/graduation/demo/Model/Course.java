@@ -35,7 +35,8 @@ public class Course {
     @OneToMany(mappedBy = "courses")
     @JsonIgnore
     private Set<StudentAndCourse> studentAndCourses;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id",referencedColumnName = "id")
     private Doctor doctor;
 }

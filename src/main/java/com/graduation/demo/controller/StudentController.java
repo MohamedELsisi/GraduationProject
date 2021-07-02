@@ -42,7 +42,7 @@ public class StudentController {
     @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
 
     public ResponseEntity findStudentById(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
-                                              @PathVariable Long id) {
+                                          @PathVariable Long id) {
         log.info("Find Student by id in controller with id = " + id);
         Student existingStudent = service.getStudentById(id);
 
@@ -66,21 +66,34 @@ public class StudentController {
     @GetMapping("/findStudentByName/{name}")
     @ApiOperation(value = "Search about Student by name ", response = ResponseEntity.class)
 
-    public ResponseEntity findStudentByName(@ApiParam(value = "Name value for the Level u need to retrieve", required = true)
-                                                @PathVariable String name) {
+    public ResponseEntity findStudentByName(@ApiParam(value = "Name value for the student u need to retrieve", required = true)
+                                            @PathVariable String name) {
         log.info("Find Student by Name in Controller with name = " + name);
         Student existingStudent = service.getStudentByName(name);
-        if ( existingStudent== null)
+        if (existingStudent == null)
             return ResponseEntity.notFound().build();
         else
             return ResponseEntity.ok(existingStudent);
     }
 
+    @GetMapping("/findStudentByEmail/{email}")
+    @ApiOperation(value = "Search about Student by email ", response = ResponseEntity.class)
+    public ResponseEntity findStudentByEmil(@ApiParam(value = "email value for the student u need to retrieve", required = true)
+                                            @PathVariable String email) {
+        log.info("Find Student by email in Controller with email = " + email);
+        Student existingStudent = service.getStudentByEmail(email);
+        if (existingStudent == null)
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.ok(existingStudent);
+    }
+
+
     @DeleteMapping("/deleteStudent/{id}")
     @ApiOperation(value = "delete student by id ", response = ResponseEntity.class)
 
     public ResponseEntity deleteStudent(@ApiParam(value = "id value for the student u need to delete", required = true)
-                                            @PathVariable  Long id) {
+                                        @PathVariable Long id) {
         log.info("Delete Course by id in controller with id = " + id);
         boolean status = service.deleteStudentById(id);
         if (status == false)

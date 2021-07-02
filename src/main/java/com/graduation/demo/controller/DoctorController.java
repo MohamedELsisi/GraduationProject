@@ -50,6 +50,22 @@ public class DoctorController {
             return ResponseEntity.status(HttpStatus.FOUND).body(doctor);
     }
 
+    @GetMapping("/findDoctorByEmail/{email}")
+    @ApiOperation(value = "search about Doctor by email ", response = ResponseEntity.class)
+    public ResponseEntity findDoctorById(@ApiParam(value = "id value for the doctor u need to retrieve", required = true)
+                                         @PathVariable String email) {
+        log.info("Find doctor by id in controller with id = " + email);
+        Doctor doctor = service.getDoctorByEmail(email);
+
+        if (doctor == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(doctor);
+    }
+
+
+
+
+
     @GetMapping("/getAllDoctors")
     @ApiOperation(value = "Show all doctors  ", response = ResponseEntity.class)
     public ResponseEntity<List<Doctor>> getAllDoctors() {
