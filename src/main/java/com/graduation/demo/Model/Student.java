@@ -1,5 +1,6 @@
 package com.graduation.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,10 @@ public class Student {
 
     @OneToMany(mappedBy = "students")
     private Set<StudentAndCourse> studentAndCourse;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    @JsonIgnore
+    private Set<Answer> answer;
 
 
 

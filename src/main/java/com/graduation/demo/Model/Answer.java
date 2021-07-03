@@ -22,8 +22,15 @@ public class Answer {
     @ApiModelProperty(notes = "The content of answer")
     private  String answer;
     @ManyToOne
-    @JoinColumn(name ="question_id",referencedColumnName = "id")
-    private Question question;
+    @JoinColumn(name ="exam_id",referencedColumnName = "id")
+    private Exam exam;
 
+    @ManyToOne
+    @JoinColumn(name ="student_id",referencedColumnName = "id")
+    private Student student;
+
+private  int totalDegree;
+
+private  int studentDegree;
 
 }

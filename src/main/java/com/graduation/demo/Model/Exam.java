@@ -39,12 +39,18 @@ public class Exam {
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
     @JsonIgnore
     private Degree degree;
-    @OneToMany(mappedBy = "exame")
+
+    /*@OneToMany(mappedBy = "exame")
     @JsonIgnore
-    private Set<Question> questiont;
+    private Set<Question> questiont;*/
+
     @ManyToOne
     @JoinColumn(name = "course_id",referencedColumnName = "id")
     private Course course;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exam")
+    @JsonIgnore
+    private Set<Answer> answer;
 
 
 

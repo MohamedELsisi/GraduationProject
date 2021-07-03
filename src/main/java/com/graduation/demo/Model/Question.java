@@ -24,12 +24,12 @@ public class Question {
     private String question;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+   /* @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
     @JsonIgnore
     private Set<Answer> answer;
     @ManyToOne
     @JoinColumn(name = "exame_id",referencedColumnName = "id")
-    private Exam exame;
+    private Exam exame;*/
 
 
 
