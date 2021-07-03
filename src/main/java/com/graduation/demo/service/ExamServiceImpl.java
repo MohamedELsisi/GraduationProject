@@ -30,10 +30,11 @@ public class ExamServiceImpl implements ExamService {
         if (existingExam == null)
             log.warn("Update_Exam is null");
         else {
-            existingExam.setDate(exam.getDate());
-            existingExam.setStart_time(exam.getStart_time());
+            existingExam.setExam_date(exam.getExam_date());
+            existingExam.setExam_over(exam.getExam_over());
             existingExam.setDoctor_name(exam.getDoctor_name());
-            existingExam.setTime(exam.getTime());
+            existingExam.setExam_time_to(exam.getExam_time_to());
+            existingExam.setExam_time_from(exam.getExam_time_from());
             existingExam.setQuestion_num(exam.getQuestion_num());
             existingExam.setCourse_name(exam.getCourse_name());
             repository.save(existingExam);
