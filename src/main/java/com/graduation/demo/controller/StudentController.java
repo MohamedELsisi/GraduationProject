@@ -99,7 +99,7 @@ public class StudentController {
         if (status == false)
             return ResponseEntity.notFound().build();
         else
-            return ResponseEntity.status(HttpStatus.FOUND).build();
+            return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PutMapping("/updateStudent")

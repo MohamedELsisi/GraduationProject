@@ -23,13 +23,13 @@ public class StudentServiceImpl implements StudentService {
     public Student addStudent(Student student) {
         log.info("Calling ADD_STUDENT service with Object " + student);
         Student existingStudent = repository.save(student);
+
         Login login =new Login();
         login.setEmail(student.getEmail());
         login.setPassword(student.getPassword());
         login.setType("student");
         login.setUserName(student.getUserName());
         loginRepository.save(login);
-
 
         if (existingStudent == null)
             log.warn("ADD_STUDENT is null");

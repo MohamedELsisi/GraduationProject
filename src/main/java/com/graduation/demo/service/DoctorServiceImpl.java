@@ -22,14 +22,16 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Doctor saveDoctor(Doctor doctor) {
         log.info("calling Save_Doctor service with Object " + doctor);
-        Login login =new Login();
+        Doctor existingDoctor = doctorRepository.save(doctor);
+
+        Login login = new Login();
         login.setEmail(doctor.getEmail());
         login.setPassword(doctor.getPassword());
         login.setType("doctor");
         login.setUserName(doctor.getUserName());
         loginRepository.save(login);
 
-        Doctor existingDoctor = doctorRepository.save(doctor);
+
         if (existingDoctor == null)
             log.warn("Save_Doctor With object  is null ");
         else
@@ -129,8 +131,6 @@ public class DoctorServiceImpl implements DoctorService {
         return existingDoctor;
 
     }
-
-
 
 
 }
