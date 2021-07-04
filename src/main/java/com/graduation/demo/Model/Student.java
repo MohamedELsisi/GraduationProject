@@ -44,6 +44,7 @@ public class Student {
 
 
     @OneToMany(mappedBy = "students")
+    @JsonIgnore
     private Set<StudentAndCourse> studentAndCourse;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")

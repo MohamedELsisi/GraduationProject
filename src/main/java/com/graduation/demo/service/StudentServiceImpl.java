@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
         if (existingStudents == null)
             log.warn("GET_ALL_STUDENTS IS NULL");
         else
-            log.info("GET_ALL_STUDENTS RESPONSE" + existingStudents);
+            log.info("GET_ALL_STUDENTS RESPONSE" + existingStudents.size());
 
         return existingStudents;
 
