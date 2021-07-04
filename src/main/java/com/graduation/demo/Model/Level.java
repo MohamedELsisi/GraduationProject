@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,9 +24,9 @@ public class Level {
     @ApiModelProperty(notes = "The name of Level")
     private String name;
 
-    @OneToOne(mappedBy = "level")
+    @ManyToOne
     @JsonIgnore
-    private LevelAndDep levelAndDep;
+    private  LevelAndDep levelAndDep;
 
 
 }

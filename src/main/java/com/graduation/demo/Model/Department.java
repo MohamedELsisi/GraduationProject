@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +22,9 @@ public class Department {
     private Long id;
     @ApiModelProperty(notes = "The name of Department")
     private String name;
-    @OneToOne(mappedBy = "department")
+
+
+    @ManyToOne
     @JsonIgnore
     private LevelAndDep levelAndDep;
 }

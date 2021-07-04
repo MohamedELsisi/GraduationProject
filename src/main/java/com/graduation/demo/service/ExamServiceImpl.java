@@ -59,7 +59,7 @@ public class ExamServiceImpl implements ExamService {
         if (existingExam == null)
             log.warn("get All Exams is null");
         else
-            log.info("get All Exams " + existingExam);
+            log.info("get All Exams " + existingExam.size());
         return existingExam;
     }
 }

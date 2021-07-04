@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,13 +18,14 @@ public class LevelAndDep {
     private Long id;
 
 
-    @OneToOne
-    @JoinColumn(name = "level_id", referencedColumnName = "id")
-    private Level level;
-    @OneToOne
+    @OneToMany
+    @JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
+    //@JoinColumn(name = "level_id", referencedColumnName = "id")
+    private List<Level> level;
 
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department department;
+    @OneToMany
+    @JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
+    private List<Department> department;
 
     @OneToMany(mappedBy = "levelAndDep")
     @JsonIgnore
