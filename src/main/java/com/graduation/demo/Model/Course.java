@@ -36,7 +36,7 @@ public class Course {
     @JsonIgnore
     private Set<StudentAndCourse> studentAndCourses;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id",referencedColumnName = "id")
     private Doctor doctor;
 }
