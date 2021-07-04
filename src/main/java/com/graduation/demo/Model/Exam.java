@@ -47,7 +47,7 @@ public class Exam {
     @JsonIgnore
     private Set<Question> questiont;*/
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id",referencedColumnName = "id")
     private Course course;
 
