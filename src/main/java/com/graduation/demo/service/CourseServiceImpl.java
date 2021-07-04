@@ -55,7 +55,7 @@ public class CourseServiceImpl implements CourseService {
         if (existingCourse == null)
             log.warn("GET_ALL_COURSES IS NULL");
         else
-            log.info("GET_ALL_COURSES RESPONSE" + existingCourse);
+            log.info("GET_ALL_COURSES RESPONSE" + existingCourse.size());
 
         return existingCourse;
     }
