@@ -14,7 +14,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"exam"})
 @ApiModel(description = "Details about the Answer")
 public class Answer {
     @Id

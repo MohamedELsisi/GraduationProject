@@ -16,7 +16,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"exam"})
+
 @ApiModel(description = "Details about the Course")
 public class Course {
     @Id

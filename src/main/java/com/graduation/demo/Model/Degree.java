@@ -13,7 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"exam"})
 @ApiModel(description = "Details about the Degree")
 public class Degree {
     @Id

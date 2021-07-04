@@ -4,10 +4,7 @@ package com.graduation.demo.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -18,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @ApiModel(description = "Details about the Exam ")
-
+@ToString(exclude = {"degree","course","answer"})
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
