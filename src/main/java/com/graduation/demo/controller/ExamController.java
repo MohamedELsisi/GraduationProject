@@ -43,10 +43,10 @@ public class ExamController {
 
     @GetMapping("/getAllStudentExams/{id}")
     @ApiOperation(value = "search All Student Exams  by id", response = ResponseEntity.class)
-    public ResponseEntity getAllExam(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+    public ResponseEntity<List<Exam>> getAllExam(@ApiParam(value = "id value for the student u need to retrieve", required = true)
             @PathVariable Long id) {
         log.info("get All Exam controller with object = " + id);
-        Set<Exam> existingExam= service.getAllExams(id);
+        List<Exam> existingExam= service.getAllExams(id);
         if (existingExam == null)
             return ResponseEntity.notFound().build();
         else {

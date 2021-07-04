@@ -53,9 +53,9 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public Set<Exam> getAllExams(Long id) {
+    public List<Exam> getAllExams(Long id) {
         log.info("calling  getAllExams service " + id);
-      Set<Exam> existingExam = repository.getAllExams(id);
+      List<Exam> existingExam = repository.getAllExams(id);
         if (existingExam == null)
             log.warn("get All Exams is null");
         else

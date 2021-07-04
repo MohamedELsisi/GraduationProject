@@ -10,6 +10,6 @@ public interface ExamService {
     public Exam updateExam(Exam exam);
     public Exam findExam(String name);
 
-    public Set<Exam> getAllExams(Long id);
+    public List<Exam> getAllExams(Long id);
 
 }

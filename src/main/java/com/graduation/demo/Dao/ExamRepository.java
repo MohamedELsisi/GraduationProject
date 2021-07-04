@@ -13,5 +13,5 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     @Query(value = "Select  exam.* \n" +
             "From exam  join student_and_course\n" +
             "on  exam.course_id = student_and_course.course_id and  student_and_course.student_id= :student_id", nativeQuery = true)
-    Set<Exam> getAllExams(@Param("student_id") Long id);
+    List<Exam> getAllExams(@Param("student_id") Long id);
 }
