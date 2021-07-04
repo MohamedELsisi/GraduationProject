@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -39,6 +40,8 @@ public class Exam {
     private int question_num;
     @ApiModelProperty(notes = "The name of Course ")
     private  String course_name;
+
+
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
     @JsonIgnore
     private Degree degree;
@@ -49,6 +52,7 @@ public class Exam {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id",referencedColumnName = "id")
+
     private Course course;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exam")
