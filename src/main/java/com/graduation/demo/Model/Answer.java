@@ -9,12 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @ApiModel(description = "Details about the Answer")
+@ToString(exclude = {"exam","student"})
 public class Answer {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,6 +24,13 @@ public class Answer {
     private Long id;
     @ApiModelProperty(notes = "The content of answer")
     private  String answer;
+    @ApiModelProperty(notes = "The Date of answer")
+    private Date data;
+    @ApiModelProperty(notes = "The Status of answer")
+    private boolean bassed;
+
+
+
     @ManyToOne
     @JoinColumn(name ="exam_id",referencedColumnName = "id")
     private Exam exam;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,19 +14,19 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"department","level"})
 public class LevelAndDep {
     @Id
     private Long id;
 
 
-    @OneToMany
-    @JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
-    //@JoinColumn(name = "level_id", referencedColumnName = "id")
-    private List<Level> level;
+    @ManyToOne
+    @JoinColumn(name = "level_id", referencedColumnName = "id")
+    private Level level;
 
-    @OneToMany
-    @JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
-    private List<Department> department;
+    @ManyToOne
+    @JoinColumn( name = "department_id",referencedColumnName = "id")
+    private  Department department;
 
     @OneToMany(mappedBy = "levelAndDep")
     @JsonIgnore

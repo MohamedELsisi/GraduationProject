@@ -25,7 +25,7 @@ public class LoginController {
     @ApiOperation(value = "new Login ", response = ResponseEntity.class)
     public ResponseEntity Login(@RequestBody Login login) {
         log.info("Login_Controller ", login);
-
+        log.info("Login_Controller "+login.getUserName());
         Login existingLogin = service.getData(login.getUserName());
 
         if (existingLogin == null)

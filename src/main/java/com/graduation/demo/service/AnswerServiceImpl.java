@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class AnswerServiceImpl implements AnswerService{
@@ -50,5 +52,30 @@ public class AnswerServiceImpl implements AnswerService{
             repository.deleteById(id);
             return true;
         }
+    }
+
+
+    @Override
+    public List<Answer> getAllStudentAnswers(Long id) {
+        log.info("Get All Student Answer service with id  " + id);
+        List<Answer> existingAnswers =repository.getAllByStudentId(id);
+        if(existingAnswers ==null)
+            log.warn("Get All Student Answer service is null");
+        else
+            log.info("Get All Student Answer service response"+existingAnswers);
+        return  existingAnswers;
+    }
+
+    @Override
+    public List<Answer> getAllByExamAndStudentId(Long stud_id, Long exam_id) {
+        log.info("Get All Student Answer service with id  " + stud_id+"  "+exam_id);
+        List<Answer> existingAnswers =repository.getAllByStudentAndExamId(stud_id,exam_id);
+        if(existingAnswers==null)
+            log.warn("get All By Exam And Student Id service is null");
+        else
+            log.info("get All By Exam And Student Id service response"+existingAnswers);
+        return  existingAnswers;
+
+
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api")
@@ -36,6 +38,41 @@ public class AnswerController {
             return ResponseEntity.ok(existingAnswer);
         }
     }
+
+
+    @GetMapping("/getAllStudentAnswers/{id}")
+    @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
+    public ResponseEntity<List<Answer>> getAllStudentAnswers(@ApiParam(value = "id value for the Department u need to retrieve", required = true)
+                                                             @PathVariable Long id) {
+        log.info("Get All student Answers  in controller with id = " + id);
+        List<Answer> existAnswer = service.getAllStudentAnswers(id);
+        if (existAnswer == null)
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
+    }
+
+
+    @GetMapping("/getAllStudentAnswersInExam/{id}/{exam_id}")
+    @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
+    public ResponseEntity<List<Answer>> getAllStudentAnswersInExam(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+                                                             @PathVariable Long id ,@PathVariable Long exam_id) {
+        log.info("Get All student Answers  in controller with id = " + id + "  "+ exam_id);
+        List<Answer> existAnswer = service.getAllByExamAndStudentId(id,exam_id);
+        if (existAnswer == null)
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
+    }
+
+
+
+
+
+
+
+
+
 
     @DeleteMapping("/deleteAnswer/{id}")
     @ApiOperation(value = "delete the answer with id ", response = ResponseEntity.class)

@@ -28,7 +28,7 @@ public class Exam {
     @ApiModelProperty(notes = "The Start time  of Exam")
     private Date exam_time_from;
     @ApiModelProperty(notes = "The time  of Exam")
-    private int  exam_time_to;
+    private Date  exam_time_to;
     @ApiModelProperty(notes = "The json content of Exam")
     private String contentJson;
     @ApiModelProperty(notes = "The name of Doctor ")
@@ -49,7 +49,6 @@ public class Exam {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id",referencedColumnName = "id")
-
     private Course course;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exam")

@@ -15,12 +15,12 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Login getData(String userName) {
-        log.info("calling getData   service with Object " + userName);
+        log.info("calling getData   service with user named " + userName);
         Login existingLogin = repository.findByUserName(userName);
         if (existingLogin == null)
             log.warn("getData With object  is null ");
         else
-            log.info("getData With object response ");
+            log.info("getData With object response "+existingLogin);
         return existingLogin;
     }
 

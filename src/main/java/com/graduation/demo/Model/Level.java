@@ -6,15 +6,18 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @ApiModel(description = "Details about the Level")
+@ToString(exclude = {"levelAndDep"})
 public class Level {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +27,9 @@ public class Level {
     @ApiModelProperty(notes = "The name of Level")
     private String name;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "level")
     @JsonIgnore
-    private  LevelAndDep levelAndDep;
+    private Set<LevelAndDep> levelAndDep;
 
 
 }
