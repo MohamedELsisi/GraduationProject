@@ -22,7 +22,6 @@ public class Answer {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "The unique id of the answer")
     private Long id;
-    @Lob
     @ApiModelProperty(notes = "The content of answer")
     private  String answer;
     @ApiModelProperty(notes = "The Date of answer")

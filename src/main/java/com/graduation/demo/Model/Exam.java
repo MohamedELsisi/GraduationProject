@@ -29,7 +29,6 @@ public class Exam {
     private Date exam_time_from;
     @ApiModelProperty(notes = "The time  of Exam")
     private Date  exam_time_to;
-    @Lob
     @ApiModelProperty(notes = "The json content of Exam")
     private String contentJson;
     @ApiModelProperty(notes = "The name of Doctor ")
