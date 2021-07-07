@@ -1,6 +1,7 @@
 package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Department;
+import com.graduation.demo.dto.AssignDepartment;
 import com.graduation.demo.service.DepartmentServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -21,9 +22,11 @@ public class DepartmentController {
 
     @PostMapping("/addDepartment")
     @ApiOperation(value = "insert new Department ", response = ResponseEntity.class)
-    public ResponseEntity addDepartment(@RequestBody Department department) {
-        log.info("Add_Department_Controller ", department);
-        Department existingDepartment = service.addDepartment(department);
+    public ResponseEntity addDepartment(@RequestBody AssignDepartment assignDepartment) {
+        log.info("Add_Department_Controller ", assignDepartment.getDepartment());
+        Department existingDepartment = service.addDepartment(assignDepartment.getDepartment());
+        assignDepartment.setDepartment(existingDepartment);
+        service.assignDepartment(assignDepartment);
         return ResponseEntity.status(HttpStatus.CREATED).body(existingDepartment);
     }
 

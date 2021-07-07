@@ -22,9 +22,9 @@ public class Degree {
 
     private Long student_id;
 
-    @OneToOne
-    @JoinColumn(name = "exam_id",referencedColumnName = "id")
-    private Exam exam;
+//    @OneToOne
+//    @JoinColumn(name = "exam_id",referencedColumnName = "id")
+//    private Exam exam;
 
 
 }

@@ -16,7 +16,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 @ApiModel(description = "Details about the Course")
 public class Course {
     @Id
@@ -25,8 +24,8 @@ public class Course {
     private Long id;
     @ApiModelProperty(notes = "The name of Course")
     private String name;
-    @ApiModelProperty(notes = "The grade of Course")
-    private int grade;
+    @ApiModelProperty(notes = "The level of Course")
+    private Long level;
     @ApiModelProperty(notes = "The passed grade of Course")
     private int passed_value;
 
@@ -34,9 +33,8 @@ public class Course {
     @JsonIgnore
     private Set<Exam> exam;
 
-    @OneToMany(mappedBy = "courses")
-    @JsonIgnore
-    private Set<StudentAndCourse> studentAndCourses;
+    @ApiModelProperty(notes = "The department of Course")
+    private Long department;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id",referencedColumnName = "id")

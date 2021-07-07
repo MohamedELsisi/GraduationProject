@@ -1,8 +1,10 @@
 package com.graduation.demo.service;
 
+import com.graduation.demo.Dao.AssignDepartmentRepository;
 import com.graduation.demo.Dao.LoginRepository;
 import com.graduation.demo.Dao.StudentRepository;
 import com.graduation.demo.Model.Doctor;
+import com.graduation.demo.Model.LevelAndDep;
 import com.graduation.demo.Model.Login;
 import com.graduation.demo.Model.Student;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +20,18 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository repository;
     @Autowired
     private LoginRepository loginRepository;
-
+    @Autowired
+    private AssignDepartmentRepository assignDepartmentRepository;
     @Override
     public Student addStudent(Student student) {
         log.info("Calling ADD_STUDENT service with Object " + student);
+        LevelAndDep levelAndDep = new LevelAndDep();
+        levelAndDep=student.getLevelAndDep();
+        int depart_id=levelAndDep.getDepartment().getId().intValue();
+        int level_id=levelAndDep.getLevel().getId().intValue();
+        levelAndDep=  assignDepartmentRepository.findByDepartmentAndLevel(depart_id,level_id);
+
+        student.setLevelAndDep(levelAndDep);
         Student existingStudent = repository.save(student);
 
         Login login =new Login();

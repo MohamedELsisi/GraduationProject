@@ -20,8 +20,8 @@ public class StudentAndCourse {
     @JoinColumn(name = "student_id",referencedColumnName = "id")
     private  Student students;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id",referencedColumnName = "id")
-    private Course courses;
+//    @ManyToOne
+//    @JoinColumn(name = "course_id",referencedColumnName = "id")
+//    private Course courses;
 
 }

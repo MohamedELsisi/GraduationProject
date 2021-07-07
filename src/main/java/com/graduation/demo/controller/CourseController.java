@@ -34,7 +34,17 @@ public class CourseController {
         List<Course> existingCourses = service.addCourses(courses);
         return ResponseEntity.status(HttpStatus.CREATED).body(existingCourses);
     }
+    @GetMapping("/findCourseByDoctorId/{id}")
+    @ApiOperation(value = "search about course with id ", response = ResponseEntity.class)
+    public ResponseEntity findCourseByDoctorId(@ApiParam(value = "id value for course u need to retrieve ", required = true)
+                                         @PathVariable int id) {
+        log.info("Find Course by id in controller with id = " + id);
+        List<Course> existingCourse = service.findCourseByDoctorId(id);
 
+        if (existingCourse == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(existingCourse);
+    }
     @GetMapping("/findCourseById/{id}")
     @ApiOperation(value = "search about course with id ", response = ResponseEntity.class)
     public ResponseEntity findCourseById(@ApiParam(value = "id value for course u need to retrieve ", required = true)

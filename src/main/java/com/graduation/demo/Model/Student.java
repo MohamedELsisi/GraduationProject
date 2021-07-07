@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @ApiModel(description = "Details about the Student")
+@ToString(exclude = {"studentAndCourse","answer"})
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

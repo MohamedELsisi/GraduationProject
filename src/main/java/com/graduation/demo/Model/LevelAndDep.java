@@ -14,9 +14,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString(exclude = {"department","level"})
+@ToString(exclude = {"student"})
 public class LevelAndDep {
+
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
 
 

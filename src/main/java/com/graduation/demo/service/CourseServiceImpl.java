@@ -98,12 +98,22 @@ public class CourseServiceImpl implements CourseService {
         else
         {
             existingCourse.setName(course.getName());
-            existingCourse.setGrade(course.getGrade());
+            existingCourse.setLevel(course.getLevel());
             existingCourse.setPassed_value(course.getPassed_value());
             courseRepository.save(existingCourse);
             log.info("UPDATE_COURSE RESPONSE"+existingCourse);
 
         }
+
+        return existingCourse;
+    }
+
+
+    public List<Course> findCourseByDoctorId(int id) {
+        log.info("Calling FIND_COURSE_BY_ID Service with id " + id);
+        List<Course> existingCourse = courseRepository.findByDoctorId(id);
+        if (existingCourse == null)
+            log.warn("FIND_COURSE_BY_ID IS NULL");
 
         return existingCourse;
     }

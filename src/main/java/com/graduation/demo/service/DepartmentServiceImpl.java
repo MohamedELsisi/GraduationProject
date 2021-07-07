@@ -1,8 +1,12 @@
 package com.graduation.demo.service;
 
+import com.graduation.demo.Dao.AssignDepartmentRepository;
 import com.graduation.demo.Dao.DepartmentRepository;
 import com.graduation.demo.Model.Department;
 import com.graduation.demo.Model.Doctor;
+import com.graduation.demo.Model.Level;
+import com.graduation.demo.Model.LevelAndDep;
+import com.graduation.demo.dto.AssignDepartment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,8 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentRepository repository;
-
+    @Autowired
+    private AssignDepartmentRepository assignDepartmentRepository;
 
     @Override
     public Department addDepartment(Department department) {
@@ -102,4 +107,17 @@ public class DepartmentServiceImpl implements DepartmentService {
         repository.save(existingDepartment);
         return existingDepartment;
     }
+
+public void assignDepartment(AssignDepartment assignDepartment){
+
+    for (Level level:assignDepartment.getLevels() ) {
+        LevelAndDep levelAndDep = new LevelAndDep();
+        levelAndDep.setLevel(level);
+        levelAndDep.setDepartment(assignDepartment.getDepartment());
+
+        assignDepartmentRepository.save(levelAndDep);
+    }
+
+}
+
 }

@@ -39,9 +39,9 @@ public class Exam {
     private  String course_name;
 
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
-    @JsonIgnore
-    private Degree degree;
+//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
+//    @JsonIgnore
+//    private Degree degree;
 
     /*@OneToMany(mappedBy = "exame")
     @JsonIgnore
