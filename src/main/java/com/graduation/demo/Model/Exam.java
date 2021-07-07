@@ -29,6 +29,7 @@ public class Exam {
     private Date exam_time_from;
     @ApiModelProperty(notes = "The time  of Exam")
     private Date  exam_time_to;
+    @Lob
     @ApiModelProperty(notes = "The json content of Exam")
     private String contentJson;
     @ApiModelProperty(notes = "The name of Doctor ")
@@ -37,7 +38,10 @@ public class Exam {
     private int question_num;
     @ApiModelProperty(notes = "The name of Course ")
     private  String course_name;
-
+    @ApiModelProperty(notes = "The name of Course ")
+    private  int min_degree;
+    @ApiModelProperty(notes = "The name of Course ")
+    private  int exam_degree;
 
 //    @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
 //    @JsonIgnore

@@ -56,7 +56,7 @@ public class Student {
 
 
 @ManyToOne(fetch = FetchType.EAGER)
-@JoinColumn( name = "levai_Dep_id",referencedColumnName = "id")
+@JoinColumn( name = "level_Dep_id",referencedColumnName = "id")
     private LevelAndDep levelAndDep;
 
 

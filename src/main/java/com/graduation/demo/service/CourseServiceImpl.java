@@ -98,8 +98,7 @@ public class CourseServiceImpl implements CourseService {
         else
         {
             existingCourse.setName(course.getName());
-            existingCourse.setLevel(course.getLevel());
-            existingCourse.setPassed_value(course.getPassed_value());
+            existingCourse.setLevel_id(course.getLevel_id());
             courseRepository.save(existingCourse);
             log.info("UPDATE_COURSE RESPONSE"+existingCourse);
 

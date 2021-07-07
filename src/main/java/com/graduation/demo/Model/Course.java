@@ -25,16 +25,14 @@ public class Course {
     @ApiModelProperty(notes = "The name of Course")
     private String name;
     @ApiModelProperty(notes = "The level of Course")
-    private Long level;
-    @ApiModelProperty(notes = "The passed grade of Course")
-    private int passed_value;
+    private Long level_id;
 
     @OneToMany(mappedBy = "course")
     @JsonIgnore
     private Set<Exam> exam;
 
     @ApiModelProperty(notes = "The department of Course")
-    private Long department;
+    private Long department_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id",referencedColumnName = "id")
