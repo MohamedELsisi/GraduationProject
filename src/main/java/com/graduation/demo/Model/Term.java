@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Entity
 public class Term {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int number;
     private int year;

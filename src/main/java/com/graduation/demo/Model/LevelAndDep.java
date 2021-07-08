@@ -4,28 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString(exclude = {"student"})
 public class LevelAndDep {
-    @Id
-    private Long id;
-    private Long level_id;
-    private Long dep_id;
 
-    @OneToOne
-    @JsonIgnore
+    @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
+    private Long id;
+
+
+    @ManyToOne
     @JoinColumn(name = "level_id", referencedColumnName = "id")
     private Level level;
-    @OneToOne
+
+    @ManyToOne
+    @JoinColumn( name = "department_id",referencedColumnName = "id")
+    private  Department department;
+
+    @OneToMany(mappedBy = "levelAndDep")
     @JsonIgnore
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department department;
+    private Set<Student> student;
 }

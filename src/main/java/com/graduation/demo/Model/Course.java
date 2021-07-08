@@ -1,8 +1,12 @@
 package com.graduation.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 import javax.persistence.*;
@@ -12,17 +16,25 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ApiModel(description = "Details about the Course")
 public class Course {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "The unique id of the course")
     private Long id;
+    @ApiModelProperty(notes = "The name of Course")
     private String name;
-    private int grade;
-    private int passed_value;
+    @ApiModelProperty(notes = "The level of Course")
+    private Long level_id;
 
-    @OneToMany
-    private Set <Exam> exam;
+    @OneToMany(mappedBy = "course")
+    @JsonIgnore
+    private Set<Exam> exam;
 
-    @ManyToMany
-    private  Set<Student>students;
+    @ApiModelProperty(notes = "The department of Course")
+    private Long department_id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id",referencedColumnName = "id")
+    private Doctor doctor;
 }
