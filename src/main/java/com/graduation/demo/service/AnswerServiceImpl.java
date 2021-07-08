@@ -78,4 +78,17 @@ public class AnswerServiceImpl implements AnswerService{
 
 
     }
+
+    @Override
+    public List<Answer> getAllByStudentAndCourseId(Long stud_id, Long course_id) {
+        log.info("Get All Student Answer service with id  " + stud_id+"  "+course_id);
+        List<Answer> existingAnswers =repository.getAllByStudentAndCourseId(stud_id,course_id);
+        if(existingAnswers==null)
+            log.warn("get All By Exam And Student Id service is null");
+        else
+            log.info("get All By Exam And Student Id service response"+existingAnswers);
+        return  existingAnswers;
+
+
+    }
 }

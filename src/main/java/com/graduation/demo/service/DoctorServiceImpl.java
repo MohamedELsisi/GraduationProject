@@ -29,6 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
         login.setPassword(doctor.getPassword());
         login.setType("doctor");
         login.setUserName(doctor.getUserName());
+        login.setId(existingDoctor.getId());
         loginRepository.save(login);
 
 
@@ -127,6 +128,15 @@ public class DoctorServiceImpl implements DoctorService {
         existingDoctor.setName(doctor.getName());
         existingDoctor.setPhone(doctor.getPhone());
         existingDoctor.setAddress(doctor.getAddress());
+        existingDoctor.setEmail(doctor.getEmail());
+        existingDoctor.setUserName(doctor.getUserName());
+        existingDoctor.setPassword(doctor.getPassword());
+
+        Login existingLogin=loginRepository.findByUserName(doctor.getUserName());
+        existingLogin.setUserName(doctor.getUserName());
+        existingLogin.setPassword(doctor.getPassword());
+        existingLogin.setEmail(doctor.getEmail());
+        loginRepository.save(existingLogin);
         doctorRepository.save(existingDoctor);
         return existingDoctor;
 

@@ -116,4 +116,14 @@ public class CourseServiceImpl implements CourseService {
 
         return existingCourse;
     }
+
+    public List<Course> findAllCoursesByStudentId(int studentId){
+
+        log.info("Calling findAllCoursesByStudentId " + studentId);
+        List<Course> existingCourse = courseRepository.findAllCoursesByStudentId(studentId);
+        if (existingCourse == null)
+            log.warn("FIND_COURSE_BY_ID IS NULL");
+
+        return existingCourse;
+    }
 }

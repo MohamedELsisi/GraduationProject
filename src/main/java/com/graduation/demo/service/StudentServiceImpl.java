@@ -39,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
         login.setPassword(student.getPassword());
         login.setType("student");
         login.setUserName(student.getUserName());
+        login.setId(existingStudent.getId());
         loginRepository.save(login);
 
         if (existingStudent == null)
@@ -135,7 +136,15 @@ public class StudentServiceImpl implements StudentService {
             existingStudent.setName(student.getName());
             existingStudent.setPhone(student.getPhone());
             existingStudent.setAddress(student.getAddress());
-        repository.save(existingStudent);
+            existingStudent.setEmail(student.getEmail());
+            existingStudent.setUserName(student.getUserName());
+            existingStudent.setPassword(student.getPassword());
+
+        Login existingLogin=loginRepository.findByUserName(student.getUserName());
+        existingLogin.setUserName(student.getUserName());
+        existingLogin.setPassword(student.getPassword());
+        existingLogin.setEmail(student.getEmail());
+        loginRepository.save(existingLogin);
         return repository.save(existingStudent);
 
     }

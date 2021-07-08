@@ -18,7 +18,7 @@ public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(notes = "The unique id of the Login")
-    private Long  id;
+    private Long  loginId;
 
     @Column(unique = true)
     @ApiModelProperty(notes = "The user name ")
@@ -29,5 +29,7 @@ public class Login {
     private String email;
     @ApiModelProperty(notes = "The user email ")
     private  String type;
+
+    private Long id;
 
 }

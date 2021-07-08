@@ -39,8 +39,8 @@ public class Answer {
     @JoinColumn(name ="student_id",referencedColumnName = "id")
     private Student student;
 
-private  int totalDegree;
+    private  int totalDegree;
 
-private  int studentDegree;
+    private  int studentDegree;
 
 }

@@ -62,4 +62,15 @@ public class ExamServiceImpl implements ExamService {
             log.info("get All Exams " + existingExam.size());
         return existingExam;
     }
+
+    @Override
+    public List<Exam> getAllNextExams(Long id) {
+        log.info("calling  getAllExams service " + id);
+        List<Exam> existingExam = repository.getAllNextExams(id);
+        if (existingExam == null)
+            log.warn("get All Exams is null");
+        else
+            log.info("get All Exams " + existingExam.size());
+        return existingExam;
+    }
 }

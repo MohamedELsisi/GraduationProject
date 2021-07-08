@@ -11,5 +11,6 @@ public interface ExamService {
     public Exam findExam(String name);
 
     public List<Exam> getAllExams(Long id);
+    public List<Exam> getAllNextExams(Long id);
 
 }

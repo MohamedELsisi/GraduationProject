@@ -37,11 +37,9 @@ public class Exam {
     private int question_num;
     @ApiModelProperty(notes = "The name of Course ")
     private  String course_name;
-    @ApiModelProperty(notes = "The name of Course ")
     private  int min_degree;
-    @ApiModelProperty(notes = "The name of Course ")
     private  int exam_degree;
-
+    private String exam_title;
 //    @OneToOne(cascade = CascadeType.ALL,mappedBy = "exam")
 //    @JsonIgnore
 //    private Degree degree;
@@ -57,26 +55,6 @@ public class Exam {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exam")
     @JsonIgnore
     private Set<Answer> answer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -32,6 +32,7 @@ public class Student {
     @ApiModelProperty(notes = "The phone number of Student")
     private String phone;
 
+    @Column(unique=true)
     @ApiModelProperty(notes = "The user name of Student")
     private  String userName;
 

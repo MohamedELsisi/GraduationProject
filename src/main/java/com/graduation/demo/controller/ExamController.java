@@ -55,5 +55,18 @@ public class ExamController {
         }
     }
 
+    @GetMapping("/getAllStudentNextExams/{id}")
+    @ApiOperation(value = "search All Student Exams  by id", response = ResponseEntity.class)
+    public ResponseEntity<List<Exam>> getAllNextExam(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+                                                 @PathVariable Long id) {
+        log.info("get All Exam controller with object = " + id);
+        List<Exam> existingExam= service.getAllNextExams(id);
+        if (existingExam == null)
+            return ResponseEntity.notFound().build();
+        else {
+            System.out.println(existingExam);
+            return ResponseEntity.ok().body(existingExam);
+        }
+    }
 
 }

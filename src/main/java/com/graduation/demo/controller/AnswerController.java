@@ -65,14 +65,17 @@ public class AnswerController {
             return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
     }
 
-
-
-
-
-
-
-
-
+    @GetMapping("/getAllStudentAnswersInExam/{id}/{course_id}")
+    @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
+    public ResponseEntity<List<Answer>> getAllByStudentAndCourseId(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+                                                                   @PathVariable Long id ,@PathVariable Long course_id) {
+        log.info("Get All student Answers  in controller with id = " + id + "  "+ course_id);
+        List<Answer> existAnswer = service.getAllByStudentAndCourseId(id,course_id);
+        if (existAnswer == null)
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
+    }
 
     @DeleteMapping("/deleteAnswer/{id}")
     @ApiOperation(value = "delete the answer with id ", response = ResponseEntity.class)

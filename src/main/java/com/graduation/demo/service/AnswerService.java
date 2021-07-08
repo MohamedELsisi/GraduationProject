@@ -10,7 +10,8 @@ public interface AnswerService {
     public boolean deleteAnswer(Long id);
     public List<Answer>getAllStudentAnswers(Long id);
 
-    public List<Answer>getAllByExamAndStudentId(Long stud_id,Long Exam_id );
+    public List<Answer> getAllByExamAndStudentId(Long stud_id,Long Exam_id );
+    public List<Answer> getAllByStudentAndCourseId(Long stud_id,Long course_id );
 
 
 
