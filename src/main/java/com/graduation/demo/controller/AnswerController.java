@@ -65,7 +65,7 @@ public class AnswerController {
             return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
     }
 
-    @GetMapping("/getAllStudentAnswersInExam/{id}/{course_id}")
+    @GetMapping("/getAllStudentAnswersInCoursess/{id}/{course_id}")
     @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
     public ResponseEntity<List<Answer>> getAllByStudentAndCourseId(@ApiParam(value = "id value for the student u need to retrieve", required = true)
                                                                    @PathVariable Long id ,@PathVariable Long course_id) {
