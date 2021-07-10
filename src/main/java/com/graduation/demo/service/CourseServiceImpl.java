@@ -156,8 +156,12 @@ String colorArray[]={"#82b741","#afafaf","#c0a2fa","#a2fac0","#14A9A4","#a9a414"
             }
 
             degree.add(summationStudentDegree);
+
         }
 
+        reportByStudent.setCoursesName(coursesName);
+        reportByStudent.setColors(colors);
+        reportByStudent.setCoursesName(coursesName);
         return reportByStudent;
     }
 }
