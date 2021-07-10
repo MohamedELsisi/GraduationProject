@@ -3,10 +3,14 @@ package com.graduation.demo.service;
 import com.graduation.demo.Dao.AnswerRepository;
 import com.graduation.demo.Model.Answer;
 import com.graduation.demo.Model.Question;
+import com.graduation.demo.dto.StudentAnswerForCourseDTO;
+import com.graduation.demo.dto.StudentAnswerForCourseFlowchartDTO;
+import com.graduation.demo.dto.StudentAnswerForCourseTableDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -80,14 +84,41 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
     @Override
-    public List<Answer> getAllByStudentAndCourseId(Long stud_id, Long course_id) {
+    public StudentAnswerForCourseDTO getAllByStudentAndCourseId(Long stud_id, Long course_id) {
         log.info("Get All Student Answer service with id  " + stud_id+"  "+course_id);
         List<Answer> existingAnswers =repository.getAllByStudentAndCourseId(stud_id,course_id);
-        if(existingAnswers==null)
-            log.warn("get All By Exam And Student Id service is null");
-        else
-            log.info("get All By Exam And Student Id service response"+existingAnswers);
-        return  existingAnswers;
+
+            List<String> examName= new ArrayList<>();
+             List<Integer> passedDegree= new ArrayList<>();
+             List<Integer> unPassedDegree= new ArrayList<>();
+            List<StudentAnswerForCourseTableDTO> CourseTableDTO= new ArrayList<>();
+            for (Answer answer:existingAnswers ) {
+                StudentAnswerForCourseTableDTO tableObject= new StudentAnswerForCourseTableDTO();
+
+                tableObject.setExamName(answer.getExam().getExam_title());
+                tableObject.setDate(answer.getDate().toString());
+                tableObject.setDoctorName(answer.getExam().getDoctor_name());
+                tableObject.setStudentDegree(answer.getStudentDegree());
+                tableObject.setStatus(answer.isPassed());
+                tableObject.setExamDegree(answer.getTotalDegree());
+                CourseTableDTO.add(tableObject);
+
+                examName.add(tableObject.getExamName());
+                if(tableObject.isStatus())
+                    passedDegree.add(tableObject.getStudentDegree());
+                else
+                    unPassedDegree.add(tableObject.getStudentDegree());
+            }
+            StudentAnswerForCourseFlowchartDTO dto= new StudentAnswerForCourseFlowchartDTO();
+            dto.setExamName(examName);
+            dto.setPassedDegree(passedDegree);
+            dto.setUnPassedDegree(unPassedDegree);
+            StudentAnswerForCourseDTO studentAnswerForCourseDTO = new StudentAnswerForCourseDTO();
+            studentAnswerForCourseDTO.setCourseTableDTO(CourseTableDTO);
+            studentAnswerForCourseDTO.setCourseFlowchartDTO(dto);
+
+
+             return  studentAnswerForCourseDTO;
 
 
     }

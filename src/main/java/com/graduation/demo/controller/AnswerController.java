@@ -1,6 +1,7 @@
 package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Answer;
+import com.graduation.demo.dto.StudentAnswerForCourseDTO;
 import com.graduation.demo.service.AnswerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -67,10 +68,10 @@ public class AnswerController {
 
     @GetMapping("/getAllStudentAnswersInCoursess/{id}/{course_id}")
     @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
-    public ResponseEntity<List<Answer>> getAllByStudentAndCourseId(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+    public ResponseEntity<StudentAnswerForCourseDTO> getAllByStudentAndCourseId(@ApiParam(value = "id value for the student u need to retrieve", required = true)
                                                                    @PathVariable Long id ,@PathVariable Long course_id) {
         log.info("Get All student Answers  in controller with id = " + id + "  "+ course_id);
-        List<Answer> existAnswer = service.getAllByStudentAndCourseId(id,course_id);
+        StudentAnswerForCourseDTO existAnswer = service.getAllByStudentAndCourseId(id,course_id);
         if (existAnswer == null)
             return ResponseEntity.notFound().build();
         else
