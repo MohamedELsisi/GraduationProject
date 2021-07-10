@@ -23,7 +23,7 @@ public class StudentAndExamForCourseDto {
 
     private LevelAndDep level_Dep_id;
 
-    private Exam exam_id;
+    private Long exam_id;
 
 
 }
