@@ -2,10 +2,14 @@ package com.graduation.demo.service;
 
 import com.graduation.demo.Dao.CourseRepository;
 import com.graduation.demo.Model.Course;
+import com.graduation.demo.dto.ALlCoursesReportByStudent;
+import com.graduation.demo.dto.StudentAnswerForCourseDTO;
+import com.graduation.demo.dto.StudentAnswerForCourseTableDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -13,6 +17,9 @@ import java.util.List;
 public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
+
+    @Autowired
+    private AnswerServiceImpl answerService;
 
     @Override
     public Course addNewCourse(Course course) {
@@ -121,9 +128,36 @@ public class CourseServiceImpl implements CourseService {
 
         log.info("Calling findAllCoursesByStudentId " + studentId);
         List<Course> existingCourse = courseRepository.findAllCoursesByStudentId(studentId);
-        if (existingCourse == null)
-            log.warn("FIND_COURSE_BY_ID IS NULL");
+
 
         return existingCourse;
+    }
+
+    public ALlCoursesReportByStudent findCoursesReportByStudentId(int studentId){
+
+String colorArray[]={"#82b741","#afafaf","#c0a2fa","#a2fac0","#14A9A4","#a9a414","#F27DBA","#028c6a","#FF5733","#DFE509"};
+         List<String> coursesName = new ArrayList<>();
+         List<Integer> degree= new ArrayList<>();
+         List<String> colors= new ArrayList<>();
+        ALlCoursesReportByStudent reportByStudent = new ALlCoursesReportByStudent();
+        log.info("Calling findAllCoursesByStudentId " + studentId);
+        List<Course> existingCourse = courseRepository.findAllCoursesByStudentId(studentId);
+
+        int index=0;
+        for (Course course:existingCourse ) {
+            StudentAnswerForCourseDTO courseDTO= answerService.getAllByStudentAndCourseId(new Long(studentId),course.getId());
+            coursesName.add(course.getName());
+            colors.add(colorArray[index++]);
+
+            int summationStudentDegree=0;
+            for (StudentAnswerForCourseTableDTO forCourseTableDTO:  courseDTO.getCourseTableDTO()    ) {
+
+                summationStudentDegree +=forCourseTableDTO.getStudentDegree();
+            }
+
+            degree.add(summationStudentDegree);
+        }
+
+        return reportByStudent;
     }
 }

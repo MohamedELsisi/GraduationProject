@@ -1,6 +1,7 @@
 package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Course;
+import com.graduation.demo.dto.ALlCoursesReportByStudent;
 import com.graduation.demo.service.CourseServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,10 +47,22 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.FOUND).body(existingCourse);
     }
 
+    @GetMapping("/findCoursesReportByStudentId/{id}")
+    @ApiOperation(value = "search about course with id ", response = ResponseEntity.class)
+    public ResponseEntity findCoursesReportByStudentId(@ApiParam(value = "id value for course u need to retrieve ", required = true)
+                                               @PathVariable int id) {
+        log.info("Find Course by id in controller with id = " + id);
+        ALlCoursesReportByStudent existingCourse = service.findCoursesReportByStudentId(id);
+
+        if (existingCourse == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(existingCourse);
+    }
+
     @GetMapping("/findCourseByStudentId/{id}")
     @ApiOperation(value = "search about course with id ", response = ResponseEntity.class)
     public ResponseEntity findAllCoursesByStudentId(@ApiParam(value = "id value for course u need to retrieve ", required = true)
-                                               @PathVariable int id) {
+                                                    @PathVariable int id) {
         log.info("Find Course by id in controller with id = " + id);
         List<Course> existingCourse = service.findAllCoursesByStudentId(id);
 
