@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -137,8 +138,10 @@ public class StudentController {
                                                  @PathVariable Long courseId,@PathVariable Long examId) {
         List<DoctorReportForCourseAndExam> existingStudent = service.getAllStudentAtCourseIdAndExamID(courseId,examId);
 
+        Set<DoctorReportForCourseAndExam> list=new LinkedHashSet<>();
+        list.addAll(existingStudent);
         if (existingStudent == null) return ResponseEntity.notFound().build();
         else
-            return ResponseEntity.status(HttpStatus.FOUND).body(existingStudent);
+            return ResponseEntity.status(HttpStatus.FOUND).body(list);
     }
 }
