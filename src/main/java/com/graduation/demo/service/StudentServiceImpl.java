@@ -167,10 +167,12 @@ log.info("student zeft List : "+studentList.size());
             for (Exam exam:examList ) {
                 List<Answer> answerList=answerRepository.getAllByStudentAndExamId(student.getId(),exam.getId());
                 log.info("answer zeft List : "+answerList.size());
-
+                log.info("student id : "+student.getId()+"  exam id : "+exam.getId());
                 DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
                 if (answerList !=null && answerList.size()>0){
                     Answer answer=answerList.get(0);
+                    log.info("answer id : "+answer.getId());
+
                     report.setAnswerDate(answer.getDate().toString());
                     report.setStudentName(student.getName());
                     report.setStudentDegree(answer.getStudentDegree());
