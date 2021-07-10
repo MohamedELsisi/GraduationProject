@@ -1,5 +1,6 @@
 package com.graduation.demo.controller;
 
+import com.graduation.demo.Dao.ExamRepository;
 import com.graduation.demo.Model.Answer;
 import com.graduation.demo.Model.Exam;
 import com.graduation.demo.service.ExamService;
@@ -21,6 +22,8 @@ public class ExamController {
     @Autowired
     private ExamService service;
 
+    @Autowired
+    private ExamRepository examRepository;
     @PostMapping("/addExam")
     @ApiOperation(value = "insert new exam",response = ResponseEntity.class)
     public ResponseEntity addExam(@RequestBody Exam exam) {
@@ -61,6 +64,21 @@ public class ExamController {
                                                  @PathVariable Long id) {
         log.info("get All Exam controller with object = " + id);
         List<Exam> existingExam= service.getAllNextExams(id);
+        if (existingExam == null)
+            return ResponseEntity.notFound().build();
+        else {
+            System.out.println(existingExam);
+            return ResponseEntity.ok().body(existingExam);
+        }
+    }
+
+
+    @GetMapping("/getAllCourseExams/{id}")
+    @ApiOperation(value = "search All Student Exams  by id", response = ResponseEntity.class)
+    public ResponseEntity<List<Exam>> getAllCourseExams(@ApiParam(value = "id value for the student u need to retrieve", required = true)
+                                                 @PathVariable Long id) {
+        log.info("get All Exam controller with object = " + id);
+        List<Exam> existingExam=examRepository.getAllExamsForCourse(id);
         if (existingExam == null)
             return ResponseEntity.notFound().build();
         else {

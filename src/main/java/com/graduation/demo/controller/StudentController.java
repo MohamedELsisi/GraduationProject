@@ -129,4 +129,16 @@ public class StudentController {
         else
             return ResponseEntity.status(HttpStatus.FOUND).body(existingStudent);
     }
+
+    @GetMapping("/findStudentsByCourse/{courseId}/{examId}")
+    @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
+
+    public ResponseEntity findStudentsByCourseId(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
+                                                 @PathVariable Long courseId,@PathVariable Long examId) {
+        List<DoctorReportForCourseAndExam> existingStudent = service.getAllStudentAtCourseIdAndExamID(courseId,examId);
+
+        if (existingStudent == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(existingStudent);
+    }
 }
