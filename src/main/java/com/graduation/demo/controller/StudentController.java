@@ -2,6 +2,7 @@ package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Course;
 import com.graduation.demo.Model.Student;
+import com.graduation.demo.dto.StudentAndExamForCourseDto;
 import com.graduation.demo.service.StudentServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RestController
@@ -114,5 +116,16 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/findStudentsByCourse/{id}")
+    @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
 
+    public ResponseEntity findStudentsByCourseId(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
+                                          @PathVariable Long id) {
+        log.info("Find Student by id in controller with id = " + id);
+        Set<StudentAndExamForCourseDto> existingStudent = service.getAllStudentAtCourseId(id);
+
+        if (existingStudent == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(existingStudent);
+    }
 }

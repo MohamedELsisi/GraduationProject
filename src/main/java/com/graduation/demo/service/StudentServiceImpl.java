@@ -7,11 +7,14 @@ import com.graduation.demo.Model.Doctor;
 import com.graduation.demo.Model.LevelAndDep;
 import com.graduation.demo.Model.Login;
 import com.graduation.demo.Model.Student;
+import com.graduation.demo.dto.DoctorReportForCourseAndExam;
+import com.graduation.demo.dto.StudentAndExamForCourseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -149,5 +152,13 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+
+    public Set<StudentAndExamForCourseDto> getAllStudentAtCourseId(Long courseId){
+
+        Set<StudentAndExamForCourseDto> studentList=repository.getAllStudentAtCourseId(courseId);
+
+
+return studentList;
+    }
 
 }
