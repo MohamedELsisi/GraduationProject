@@ -158,12 +158,16 @@ public class StudentServiceImpl implements StudentService {
 
         List<DoctorReportForCourseAndExam> reportList= new ArrayList<>();
         List<Student> studentList=repository.getAllStudentAtCourseId(courseId);
-
+log.info("student zeft List : "+studentList.size());
         List<Exam> examList=examRepository.getAllExamsForCourse(courseId);
+        log.info("exam zeft List : "+examList.size());
+
         for (Student student:studentList ) {
 
             for (Exam exam:examList ) {
                 List<Answer> answerList=answerRepository.getAllByStudentAndExamId(student.getId(),exam.getId());
+                log.info("answer zeft List : "+answerList.size());
+
                 DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
                 if (answerList !=null || answerList.size()>0){
                     Answer answer=answerList.get(0);
