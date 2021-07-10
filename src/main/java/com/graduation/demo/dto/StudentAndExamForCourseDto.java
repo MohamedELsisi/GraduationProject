@@ -1,5 +1,6 @@
 package com.graduation.demo.dto;
 
+import com.graduation.demo.Model.LevelAndDep;
 import lombok.Data;
 
 @Data
@@ -19,7 +20,7 @@ public class StudentAndExamForCourseDto {
 
     private String email ;
 
-    private Long level_Dep_id;
+    private LevelAndDep level_Dep_id;
 
     private Long exam_id;
 
