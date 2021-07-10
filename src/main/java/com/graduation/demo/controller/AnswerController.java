@@ -3,6 +3,7 @@ package com.graduation.demo.controller;
 import com.graduation.demo.Model.Answer;
 import com.graduation.demo.dto.StudentAnswerForCourseDTO;
 import com.graduation.demo.service.AnswerService;
+import com.graduation.demo.service.AnswerServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class AnswerController {
     @Autowired
-    private AnswerService service;
+    private AnswerServiceImpl service;
 
     @PostMapping("/addAnswer")
     @ApiOperation(value = "insert answer", response = ResponseEntity.class)
@@ -78,6 +79,17 @@ public class AnswerController {
             return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
     }
 
+
+    @GetMapping("/getAllAnswersByCourseId/{course_id}")
+    @ApiOperation(value = "Show All Student Answers ", response = ResponseEntity.class)
+    public ResponseEntity<StudentAnswerForCourseDTO> getAllAnswersByCourseId(@PathVariable Long course_id) {
+        StudentAnswerForCourseDTO existAnswer = service.getAllAnswersByCourseId(course_id);
+        if (existAnswer == null)
+            return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
+    }
+    
     @DeleteMapping("/deleteAnswer/{id}")
     @ApiOperation(value = "delete the answer with id ", response = ResponseEntity.class)
     public ResponseEntity deleteAnswer(@ApiParam(value = "id value for the answer u need to delete", required = true)

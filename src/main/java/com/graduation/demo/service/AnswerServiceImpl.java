@@ -122,4 +122,43 @@ public class AnswerServiceImpl implements AnswerService{
 
 
     }
+
+
+    public StudentAnswerForCourseDTO getAllAnswersByCourseId( Long course_id) {
+        List<Answer> existingAnswers =repository.getAllByCourseId(course_id);
+
+        List<String> examName= new ArrayList<>();
+        List<Integer> passedDegree= new ArrayList<>();
+        List<Integer> unPassedDegree= new ArrayList<>();
+        List<StudentAnswerForCourseTableDTO> CourseTableDTO= new ArrayList<>();
+        for (Answer answer:existingAnswers ) {
+            StudentAnswerForCourseTableDTO tableObject= new StudentAnswerForCourseTableDTO();
+
+            tableObject.setExamName(answer.getExam().getExam_title());
+            tableObject.setDate(answer.getDate().toString());
+            tableObject.setDoctorName(answer.getExam().getDoctor_name());
+            tableObject.setStudentDegree(answer.getStudentDegree());
+            tableObject.setStatus(answer.isPassed());
+            tableObject.setExamDegree(answer.getTotalDegree());
+            CourseTableDTO.add(tableObject);
+
+            examName.add(tableObject.getExamName());
+            if(tableObject.isStatus())
+                passedDegree.add(tableObject.getStudentDegree());
+            else
+                unPassedDegree.add(tableObject.getStudentDegree());
+        }
+        StudentAnswerForCourseFlowchartDTO dto= new StudentAnswerForCourseFlowchartDTO();
+        dto.setExamName(examName);
+        dto.setPassedDegree(passedDegree);
+        dto.setUnPassedDegree(unPassedDegree);
+        StudentAnswerForCourseDTO studentAnswerForCourseDTO = new StudentAnswerForCourseDTO();
+        studentAnswerForCourseDTO.setCourseTableDTO(CourseTableDTO);
+        studentAnswerForCourseDTO.setCourseFlowchartDTO(dto);
+
+
+        return  studentAnswerForCourseDTO;
+
+
+    }
 }

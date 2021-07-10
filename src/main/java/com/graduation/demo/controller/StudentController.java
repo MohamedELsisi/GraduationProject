@@ -125,10 +125,11 @@ public class StudentController {
                                           @PathVariable Long id) {
         log.info("Find Student by id in controller with id = " + id);
         List<DoctorReportForCourseAndExam> existingStudent = service.getAllStudentAtCourseId(id);
-
+        Set<DoctorReportForCourseAndExam> list=new LinkedHashSet<>();
+        list.addAll(existingStudent);
         if (existingStudent == null) return ResponseEntity.notFound().build();
         else
-            return ResponseEntity.status(HttpStatus.FOUND).body(existingStudent);
+            return ResponseEntity.status(HttpStatus.FOUND).body(list);
     }
 
     @GetMapping("/findStudentsByCourse/{courseId}/{examId}")
