@@ -2,6 +2,7 @@ package com.graduation.demo.controller;
 
 import com.graduation.demo.Model.Course;
 import com.graduation.demo.Model.Student;
+import com.graduation.demo.dto.DoctorReportForCourseAndExam;
 import com.graduation.demo.dto.StudentAndExamForCourseDto;
 import com.graduation.demo.service.StudentServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -122,7 +123,7 @@ public class StudentController {
     public ResponseEntity findStudentsByCourseId(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
                                           @PathVariable Long id) {
         log.info("Find Student by id in controller with id = " + id);
-        List<StudentAndExamForCourseDto> existingStudent = service.getAllStudentAtCourseId(id);
+        List<DoctorReportForCourseAndExam> existingStudent = service.getAllStudentAtCourseId(id);
 
         if (existingStudent == null) return ResponseEntity.notFound().build();
         else

@@ -1,18 +1,15 @@
 package com.graduation.demo.service;
 
-import com.graduation.demo.Dao.AssignDepartmentRepository;
-import com.graduation.demo.Dao.LoginRepository;
-import com.graduation.demo.Dao.StudentRepository;
-import com.graduation.demo.Model.Doctor;
-import com.graduation.demo.Model.LevelAndDep;
-import com.graduation.demo.Model.Login;
-import com.graduation.demo.Model.Student;
+import com.graduation.demo.Dao.*;
+import com.graduation.demo.Model.*;
 import com.graduation.demo.dto.DoctorReportForCourseAndExam;
 import com.graduation.demo.dto.StudentAndExamForCourseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +22,10 @@ public class StudentServiceImpl implements StudentService {
     private LoginRepository loginRepository;
     @Autowired
     private AssignDepartmentRepository assignDepartmentRepository;
+    @Autowired
+    private AnswerRepository answerRepository;
+    @Autowired
+    private ExamRepository examRepository;
     @Override
     public Student addStudent(Student student) {
         log.info("Calling ADD_STUDENT service with Object " + student);
@@ -153,12 +154,35 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public List<StudentAndExamForCourseDto> getAllStudentAtCourseId(Long courseId){
+    public List<DoctorReportForCourseAndExam> getAllStudentAtCourseId(Long courseId){
 
-        List<StudentAndExamForCourseDto> studentList=repository.getAllStudentAtCourseId(courseId);
+        List<DoctorReportForCourseAndExam> reportList= new ArrayList<>();
+        List<Student> studentList=repository.getAllStudentAtCourseId(courseId);
+
+        List<Exam> examList=examRepository.getAllExamsForCourse(courseId);
+        for (Student student:studentList ) {
+
+            for (Exam exam:examList ) {
+                List<Answer> answerList=answerRepository.getAllByStudentAndExamId(student.getId(),exam.getId());
+                DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
+                if (answerList !=null || answerList.size()>0){
+                    Answer answer=answerList.get(0);
+                    report.setAnswerDate(answer.getDate().toString());
+                    report.setStudentName(student.getName());
+                    report.setStudentDegree(answer.getStudentDegree());
+                    report.setStudentPhone(student.getPhone());
+                    report.setStatus(answer.isPassed());
+                    report.setExamDegree(answer.getTotalDegree());
+                    report.setExamName(exam.getExam_title());
 
 
-return studentList;
+                }
+reportList.add(report);
+            }
+        }
+
+
+return reportList;
     }
 
 }
