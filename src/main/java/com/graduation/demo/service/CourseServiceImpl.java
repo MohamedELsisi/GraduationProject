@@ -145,23 +145,25 @@ String colorArray[]={"#82b741","#afafaf","#c0a2fa","#a2fac0","#14A9A4","#a9a414"
 
         int index=0;
         for (Course course:existingCourse ) {
-            StudentAnswerForCourseDTO courseDTO= answerService.getAllByStudentAndCourseId(new Long(studentId),course.getId());
-            coursesName.add(course.getName());
-            colors.add(colorArray[index++]);
+            StudentAnswerForCourseDTO courseDTO = answerService.getAllByStudentAndCourseId(new Long(studentId), course.getId());
+            if (courseDTO != null) {
+                coursesName.add(course.getName());
+                colors.add(colorArray[index++]);
 
-            int summationStudentDegree=0;
-            for (StudentAnswerForCourseTableDTO forCourseTableDTO:  courseDTO.getCourseTableDTO()    ) {
+                int summationStudentDegree = 0;
+                for (StudentAnswerForCourseTableDTO forCourseTableDTO : courseDTO.getCourseTableDTO()) {
 
-                summationStudentDegree +=forCourseTableDTO.getStudentDegree();
+                    summationStudentDegree += forCourseTableDTO.getStudentDegree();
+                }
+
+                degree.add(summationStudentDegree);
+
             }
-
-            degree.add(summationStudentDegree);
-
         }
 
         reportByStudent.setCoursesName(coursesName);
         reportByStudent.setColors(colors);
-        reportByStudent.setCoursesName(coursesName);
+        reportByStudent.setDegree(degree);
         return reportByStudent;
     }
 }
