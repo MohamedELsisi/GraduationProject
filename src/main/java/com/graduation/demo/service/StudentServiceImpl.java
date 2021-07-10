@@ -169,7 +169,7 @@ log.info("student zeft List : "+studentList.size());
                 log.info("answer zeft List : "+answerList.size());
 
                 DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
-                if (answerList !=null || answerList.size()>0){
+                if (answerList !=null && answerList.size()>0){
                     Answer answer=answerList.get(0);
                     report.setAnswerDate(answer.getDate().toString());
                     report.setStudentName(student.getName());
@@ -179,9 +179,9 @@ log.info("student zeft List : "+studentList.size());
                     report.setExamDegree(answer.getTotalDegree());
                     report.setExamName(exam.getExam_title());
 
-
+                    reportList.add(report);
                 }
-reportList.add(report);
+
             }
         }
 
