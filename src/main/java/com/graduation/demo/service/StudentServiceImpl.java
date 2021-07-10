@@ -153,9 +153,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    public Set<Student> getAllStudentAtCourseId(Long courseId){
+    public List<Student> getAllStudentAtCourseId(Long courseId){
 
-        Set<Student> studentList=repository.getAllStudentAtCourseId(courseId);
+        List<Student> studentList=repository.getAllStudentAtCourseId(courseId);
 
 
 return studentList;

@@ -122,7 +122,7 @@ public class StudentController {
     public ResponseEntity findStudentsByCourseId(@ApiParam(value = "id value for the Student u need to retrieve", required = true)
                                           @PathVariable Long id) {
         log.info("Find Student by id in controller with id = " + id);
-        Set<Student> existingStudent = service.getAllStudentAtCourseId(id);
+        List<Student> existingStudent = service.getAllStudentAtCourseId(id);
 
         if (existingStudent == null) return ResponseEntity.notFound().build();
         else
