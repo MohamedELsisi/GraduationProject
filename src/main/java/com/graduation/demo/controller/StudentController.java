@@ -112,7 +112,7 @@ public class StudentController {
 
     @PutMapping("/updateStudent")
     @ApiOperation(value = "Update student", response = ResponseEntity.class)
-    public ResponseEntity updateStudent(Student student) {
+    public ResponseEntity updateStudent(@RequestBody Student student) {
         log.info("Update  Course controller with object = " + student);
         Student existingStudent = service.updateStudent(student);
         if (existingStudent == null)
