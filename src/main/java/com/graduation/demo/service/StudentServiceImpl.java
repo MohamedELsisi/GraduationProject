@@ -207,13 +207,16 @@ return reportList;
         for (Student student:studentList ) {
 
             for (Exam exam:examList ) {
-                List<Answer> answerList=answerRepository.getAllByStudentAndExamId(student.getId(),examId);
-                log.info("answer zeft List : "+answerList.size());
-                log.info("student id : "+student.getId()+"  exam id : "+exam.getId());
+                List<Answer> answerList = answerRepository.getAllByStudentAndExamId(student.getId(), examId);
+                log.info("answer zeft List : " + answerList.size());
+                log.info("student id : " + student.getId() + "  exam id : " + exam.getId());
                 DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
-                if (answerList !=null && answerList.size()>0){
-                    Answer answer=answerList.get(0);
-                    log.info("answer id : "+answer.getId());
+                for (Answer ans : answerList) {
+
+
+                if (answerList != null && ans.getExam().getId()==examId) {
+                    Answer answer = ans;
+                    log.info("answer id : " + answer.getId());
 
                     report.setAnswerDate(answer.getDate().toString());
                     report.setStudentName(student.getName());
@@ -225,7 +228,7 @@ return reportList;
 
                     reportList.add(report);
                 }
-
+            }
             }
         }
 
