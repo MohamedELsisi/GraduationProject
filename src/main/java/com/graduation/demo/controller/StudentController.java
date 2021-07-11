@@ -1,6 +1,8 @@
 package com.graduation.demo.controller;
 
+import com.graduation.demo.Dao.NotificationsRepository;
 import com.graduation.demo.Model.Course;
+import com.graduation.demo.Model.Notifications;
 import com.graduation.demo.Model.Student;
 import com.graduation.demo.dto.DoctorReportForCourseAndExam;
 import com.graduation.demo.dto.StudentAndExamForCourseDto;
@@ -24,6 +26,8 @@ public class StudentController {
     @Autowired
     private StudentServiceImpl service;
 
+    @Autowired
+    private NotificationsRepository notificationsRepository;
     @PostMapping("/addStudent")
     @ApiOperation(value = "insert new Student ", response = ResponseEntity.class)
 
@@ -145,4 +149,30 @@ public class StudentController {
         else
             return ResponseEntity.status(HttpStatus.FOUND).body(list);
     }
+
+
+    @GetMapping("/findStudentNotification/{studentId}")
+    @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
+
+    public ResponseEntity findStudentNotification(@PathVariable Long studentId) {
+        List<Notifications> existingStudent = service.findNotificationByStudentId(studentId.intValue());
+
+        Set<Notifications> list=new LinkedHashSet<>();
+        list.addAll(existingStudent);
+        if (existingStudent == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.FOUND).body(list);
+    }
+
+    @PatchMapping("/updateStudentNotification")
+    @ApiOperation(value = "search about student by id ", response = ResponseEntity.class)
+    public ResponseEntity updateStudentNotification(@RequestBody Notifications notifications) {
+
+        Notifications existingStudent=notificationsRepository.save(notifications);
+
+        if (existingStudent == null) return ResponseEntity.notFound().build();
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(existingStudent);
+    }
+
 }

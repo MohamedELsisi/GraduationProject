@@ -89,7 +89,7 @@ public class AnswerController {
         else
             return ResponseEntity.status(HttpStatus.OK).body(existAnswer);
     }
-    
+
     @DeleteMapping("/deleteAnswer/{id}")
     @ApiOperation(value = "delete the answer with id ", response = ResponseEntity.class)
     public ResponseEntity deleteAnswer(@ApiParam(value = "id value for the answer u need to delete", required = true)

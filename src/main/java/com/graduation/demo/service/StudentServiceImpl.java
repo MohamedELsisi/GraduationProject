@@ -2,8 +2,7 @@ package com.graduation.demo.service;
 
 import com.graduation.demo.Dao.*;
 import com.graduation.demo.Model.*;
-import com.graduation.demo.dto.DoctorReportForCourseAndExam;
-import com.graduation.demo.dto.StudentAndExamForCourseDto;
+import com.graduation.demo.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,11 @@ public class StudentServiceImpl implements StudentService {
     private AnswerRepository answerRepository;
     @Autowired
     private ExamRepository examRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private NotificationsRepository notificationsRepository;
     @Override
     public Student addStudent(Student student) {
         log.info("Calling ADD_STUDENT service with Object " + student);
@@ -228,5 +232,21 @@ return reportList;
 
         return reportList;
     }
+
+    public List<Notifications> findNotificationByStudentId(int studentId){
+
+        List<Course> existingCourse = courseRepository.findAllCoursesByStudentId(studentId);
+
+        List<Notifications> responseList= new ArrayList<>();
+        for (Course course:existingCourse  ) {
+            List<Notifications> notificationsList=notificationsRepository.findByCourseId(course.getId().intValue());
+          if(notificationsList !=null && notificationsList.size()>0) {
+              responseList.addAll(notificationsList);
+          }
+        }
+
+        return responseList;
+    }
+
 
 }

@@ -1,7 +1,9 @@
 package com.graduation.demo.service;
 
 import com.graduation.demo.Dao.ExamRepository;
+import com.graduation.demo.Dao.NotificationsRepository;
 import com.graduation.demo.Model.Exam;
+import com.graduation.demo.Model.Notifications;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,15 +17,36 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
     private ExamRepository repository;
 
+    @Autowired
+    NotificationsRepository notificationsRepository;
     @Override
     public Exam createExam(Exam exam) {
         log.info("calling Create_Exam service with Object " + exam);
         Exam existingExam = repository.save(exam);
         if (existingExam == null)
             log.warn("Create Exam is null");
-        else
+        else {
             log.info("Create Exam response " + existingExam);
-        return existingExam;
+            Notifications notifications = new Notifications();
+            notifications.setDate(exam.getExam_time_from().toString());
+            notifications.setCourseId(exam.getCourse().getId());
+            notifications.setRead(false);
+            StringBuilder builder = new StringBuilder();
+            builder.append("Doctor ");
+            builder.append(exam.getDoctor_name());
+            builder.append(" has Created Exam : ");
+            builder.append(exam.getExam_title());
+            builder.append(" for Course : ");
+            builder.append(exam.getCourse_name());
+            builder.append(" on Date : ");
+            builder.append(exam.getExam_time_from().toString());
+            builder.append(" You Can Check from Your Next Exam Tap");
+
+            notifications.setMessage(builder.toString());
+
+            notificationsRepository.save(notifications);
+        }
+            return existingExam;
     }
 
     @Override
