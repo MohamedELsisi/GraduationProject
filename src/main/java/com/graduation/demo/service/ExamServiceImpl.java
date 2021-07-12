@@ -1,7 +1,9 @@
 package com.graduation.demo.service;
 
+import com.graduation.demo.Dao.AnswerRepository;
 import com.graduation.demo.Dao.ExamRepository;
 import com.graduation.demo.Dao.NotificationsRepository;
+import com.graduation.demo.Model.Answer;
 import com.graduation.demo.Model.Exam;
 import com.graduation.demo.Model.Notifications;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,9 @@ import java.util.Set;
 public class ExamServiceImpl implements ExamService {
     @Autowired
     private ExamRepository repository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @Autowired
     NotificationsRepository notificationsRepository;
@@ -79,6 +84,12 @@ public class ExamServiceImpl implements ExamService {
     public List<Exam> getAllExams(Long id) {
         log.info("calling  getAllExams service " + id);
       List<Exam> existingExam = repository.getAllExams(id);
+        for (Exam exam:existingExam  ) {
+            List<Answer> answerList=answerRepository.getAllByStudentAndExamId(id,exam.getId());
+            if (answerList!=null && answerList.size()>0){
+                existingExam.remove(exam);
+            }
+        }
         if (existingExam == null)
             log.warn("get All Exams is null");
         else
