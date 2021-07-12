@@ -197,7 +197,6 @@ return reportList;
 
 
     public List<DoctorReportForCourseAndExam> getAllStudentAtCourseIdAndExamID(Long courseId,Long examId){
-
         List<DoctorReportForCourseAndExam> reportList= new ArrayList<>();
         List<Student> studentList=repository.getAllStudentAtCourseId(courseId);
         log.info("student zeft List : "+studentList.size());
@@ -207,28 +206,27 @@ return reportList;
         for (Student student:studentList ) {
 
             for (Exam exam:examList ) {
-                List<Answer> answerList = answerRepository.getAllByStudentAndExamId(student.getId(), examId);
-                log.info("answer zeft List : " + answerList.size());
-                log.info("student id : " + student.getId() + "  exam id : " + exam.getId());
-                DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
-                for (Answer ans : answerList) {
+                if (exam.getId() == examId) {
+                    List<Answer> answerList = answerRepository.getAllByStudentAndExamId(student.getId(), examId);
+                    log.info("answer zeft List : " + answerList.size());
+                    log.info("student id : " + student.getId() + "  exam id : " + exam.getId());
+                    DoctorReportForCourseAndExam report = new DoctorReportForCourseAndExam();
+                    if (answerList != null && answerList.size() > 0) {
+                        Answer answer = answerList.get(0);
+                        log.info("answer id : " + answer.getId());
 
+                        report.setAnswerDate(answer.getDate().toString());
+                        report.setStudentName(student.getName());
+                        report.setStudentDegree(answer.getStudentDegree());
+                        report.setStudentPhone(student.getPhone());
+                        report.setStatus(answer.isPassed());
+                        report.setExamDegree(answer.getTotalDegree());
+                        report.setExamName(exam.getExam_title());
 
-                if (answerList != null && ans.getExam().getId()==examId) {
-                    Answer answer = ans;
-                    log.info("answer id : " + answer.getId());
+                        reportList.add(report);
+                    }
 
-                    report.setAnswerDate(answer.getDate().toString());
-                    report.setStudentName(student.getName());
-                    report.setStudentDegree(answer.getStudentDegree());
-                    report.setStudentPhone(student.getPhone());
-                    report.setStatus(answer.isPassed());
-                    report.setExamDegree(answer.getTotalDegree());
-                    report.setExamName(exam.getExam_title());
-
-                    reportList.add(report);
                 }
-            }
             }
         }
 
