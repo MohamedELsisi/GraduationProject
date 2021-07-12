@@ -19,4 +19,5 @@ List<Exam> getAllExams(@Param("student_id") Long id);
 
     @Query(value = "SELECT exam.* from exam where course_id = :course", nativeQuery = true)
     List<Exam> getAllExamsForCourse(@Param("course") Long id);
+
 }
