@@ -140,12 +140,28 @@ public class AnswerServiceImpl implements AnswerService{
             tableObject.setStatus(answer.isPassed());
             tableObject.setExamDegree(answer.getTotalDegree());
             CourseTableDTO.add(tableObject);
-            examName.add(tableObject.getExamName());
-            if(tableObject.isStatus())
-                passedDegree.add(tableObject.getStudentDegree());
-            else
-                unPassedDegree.add(tableObject.getStudentDegree());
+            if (examName.contains(tableObject.getExamName())){
+                int index= examName.indexOf(tableObject.getExamName());
+
+                if(tableObject.isStatus()) {
+                    passedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
+                    unPassedDegree.set(index, passedDegree.get(index) + 0);
+
+                } else {
+                    passedDegree.set(index, passedDegree.get(index) + 0);
+                    unPassedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
+                }
+            }else{
+                examName.add(tableObject.getExamName());
+                if(tableObject.isStatus())
+                    passedDegree.add(tableObject.getStudentDegree());
+                else
+                    unPassedDegree.add(tableObject.getStudentDegree());
+            }
+
+
         }
+
         StudentAnswerForCourseFlowchartDTO dto= new StudentAnswerForCourseFlowchartDTO();
         dto.setExamName(examName);
         dto.setPassedDegree(passedDegree);
@@ -176,26 +192,11 @@ public class AnswerServiceImpl implements AnswerService{
             tableObject.setStatus(answer.isPassed());
             tableObject.setExamDegree(answer.getTotalDegree());
             CourseTableDTO.add(tableObject);
-            if (examName.contains(tableObject.getExamName())){
-                int index= examName.indexOf(tableObject.getExamName());
-
-                if(tableObject.isStatus()) {
-                    passedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
-                    unPassedDegree.set(index,0);
-
-                } else {
-                    passedDegree.set(index,0);
-                    unPassedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
-                }
-            }else{
-                examName.add(tableObject.getExamName());
-                if(tableObject.isStatus())
-                    passedDegree.add(tableObject.getStudentDegree());
-                else
-                    unPassedDegree.add(tableObject.getStudentDegree());
-            }
-
-
+            examName.add(tableObject.getExamName());
+            if(tableObject.isStatus())
+                passedDegree.add(tableObject.getStudentDegree());
+            else
+                unPassedDegree.add(tableObject.getStudentDegree());
         }
         StudentAnswerForCourseFlowchartDTO dto= new StudentAnswerForCourseFlowchartDTO();
         dto.setExamName(examName);
