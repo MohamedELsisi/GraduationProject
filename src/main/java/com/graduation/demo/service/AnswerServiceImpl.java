@@ -151,14 +151,18 @@ public class AnswerServiceImpl implements AnswerService{
                     passedDegree.set(index, passedDegree.get(index) + 0);
                     unPassedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
                 }
-            }else{
+            }else {
                 examName.add(tableObject.getExamName());
-                if(tableObject.isStatus())
+                if (tableObject.isStatus()) {
                     passedDegree.add(tableObject.getStudentDegree());
-                else
-                    unPassedDegree.add(tableObject.getStudentDegree());
-            }
+                    unPassedDegree.add(0);
 
+                } else {
+                    unPassedDegree.add(tableObject.getStudentDegree());
+                    passedDegree.add(0);
+
+                }
+            }
 
         }
 
