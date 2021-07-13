@@ -144,21 +144,21 @@ public class AnswerServiceImpl implements AnswerService{
                 int index= examName.indexOf(tableObject.getExamName());
 
                 if(tableObject.isStatus()) {
-                    passedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
+                    passedDegree.set(index, passedDegree.get(index) + 1);
                     unPassedDegree.set(index, passedDegree.get(index) + 0);
 
                 } else {
                     passedDegree.set(index, passedDegree.get(index) + 0);
-                    unPassedDegree.set(index, passedDegree.get(index) + tableObject.getStudentDegree());
+                    unPassedDegree.set(index, passedDegree.get(index) + 1);
                 }
             }else {
                 examName.add(tableObject.getExamName());
                 if (tableObject.isStatus()) {
-                    passedDegree.add(tableObject.getStudentDegree());
+                    passedDegree.add(1);
                     unPassedDegree.add(0);
 
                 } else {
-                    unPassedDegree.add(tableObject.getStudentDegree());
+                    unPassedDegree.add(1);
                     passedDegree.add(0);
 
                 }
@@ -187,7 +187,7 @@ public class AnswerServiceImpl implements AnswerService{
         List<Integer> unPassedDegree= new ArrayList<>();
         List<StudentAnswerForCourseTableDTO> CourseTableDTO= new ArrayList<>();
         for (Answer answer:existingAnswers ) {
-            StudentAnswerForCourseTableDTO tableObject= new StudentAnswerForCourseTableDTO();
+            StudentAnswerForCourseTableDTO tableObject = new StudentAnswerForCourseTableDTO();
 
             tableObject.setExamName(answer.getExam().getExam_title());
             tableObject.setDate(answer.getDate().toString());
@@ -197,10 +197,15 @@ public class AnswerServiceImpl implements AnswerService{
             tableObject.setExamDegree(answer.getTotalDegree());
             CourseTableDTO.add(tableObject);
             examName.add(tableObject.getExamName());
-            if(tableObject.isStatus())
+            if (tableObject.isStatus()) {
                 passedDegree.add(tableObject.getStudentDegree());
-            else
+                unPassedDegree.add(0);
+
+            } else {
                 unPassedDegree.add(tableObject.getStudentDegree());
+                passedDegree.add(0);
+
+            }
         }
         StudentAnswerForCourseFlowchartDTO dto= new StudentAnswerForCourseFlowchartDTO();
         dto.setExamName(examName);
